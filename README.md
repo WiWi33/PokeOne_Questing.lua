@@ -7,7 +7,7 @@ A Lua script for PokeOne+ that plays Pokéone for you from the very Start to as 
 
 Installation of updates:
 
-Step 1: Download https://github.com/WiWi33/PokeOne_Questing.lua.git
+Step 1: Download https://github.com/WiWi33/PokeOne_Questing.lua/archive/master.zip
 
 Step 2: Run PokeOne+, load questing.lua from the folder that you downloaded.
 
