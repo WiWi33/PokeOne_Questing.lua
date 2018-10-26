@@ -9,7 +9,7 @@ local Quest  = require "Quests/Quest"
 local Dialog = require "Quests/Dialog"
 
 local name        = 'StartKantoQuest'
-local description = 'from route 2 to route 3'
+local description = 'Getting starter and finishing Viridian City quests!'
 local dialogs = {
 	momTalk = Dialog:new({
     "Right. All boys leave home someday.",
@@ -25,13 +25,14 @@ local dialogs = {
         "There are lots of Pokémon in the tall grass!"
     }),
     lassBeat = Dialog:new({
-        "I'm sureyou will make your way"
+        "I'm sure you will make your way"
     }),
     nurse = Dialog:new({
         "There you go, take care of them!"
     }),
     carl = Dialog:new({
-        "There you go, take care of them!"
+        "She can teach you something about Pokémon!",
+		"How may I help you?"
     }),
     dizzy = Dialog:new({
         "If not, feel free to use the computers!"
@@ -74,17 +75,21 @@ function StartKantoQuest:PalletTown()
 end
 
 function StartKantoQuest:ViridianPokémonMart()
-    --You are in your house
     if not dialogs.carl.state then
         talkToNpcOnCell(10, 68)
+    elseif isShopOpen() then
+        log("CLOSING SHOP.....")
+        closeShop()
     else
-        moveToArea("Viridian City")
+        log("Need to move to ViridianCity")
+        moveToCell(13, 78)
     end
 
 end
 
 function StartKantoQuest:OaksLab()
     if getTeamSize() == 0 then
+		pushDialogAnswer(starterName)
         talkToNpcOnCell(22, 103) -- TODO : Choose you damn pokemon
     else 
         moveToCell(22, 108)
@@ -109,7 +114,7 @@ function StartKantoQuest:ViridianCity()
         else
             moveToCell(146, 91)
         end
-    elseif not (1 == 1) then
+    elseif not (dialogs.carl.state) then
         moveToCell(156, 81)
     elseif not (dialogs.dizzy.state) and not game.inRectangle(3, 6, 22, 22) then
         moveToCell(148, 72)
