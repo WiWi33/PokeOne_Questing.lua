@@ -284,8 +284,7 @@ end
 	--then 
 	--and getAreaName() ~= "Route 22" then  
    if  not isAlreadyCaught() and getPokedexOwned() < 11  then 
-    log("hello")
-    return useItem("Poke Ball") or  useItem("Repeat Ball")  or sendUsablePokemon() or run() or sendAnyPokemon()
+    return useItem("Poké Ball") or  useItem("Repeat Ball")  or sendUsablePokemon() or run() or sendAnyPokemon()
    else 
    return  attack() or run() or sendUsablePokemon()  or sendAnyPokemon()
    end 
