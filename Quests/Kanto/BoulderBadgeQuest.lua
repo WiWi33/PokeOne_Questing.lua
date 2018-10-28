@@ -58,6 +58,31 @@ local dialogs = {
 	npcBrock = Dialog:new({
 	"Just as I thought! You're Pokémon champ material!"
 		}),
+    --Route 3 NPC
+	npcHikerWilly = Dialog:new({
+	"Take a look at the meteorite crater nearby.",
+	"You should find a Moon Stone there!"
+		}),
+	npcHikerWilly2 = Dialog:new({
+	"Mt. Moon holds many secrets...",
+	}),	
+	npcYoungsterJosh = Dialog:new({
+	"Wait, we'll meet again!",
+	"Until then I'll catch more Pokémon!"
+		}),
+	npcLassJanie = Dialog:new({
+	"A lot of meteorites came down over Mt. Moon."
+		}),
+	npcBugcatcherKent = Dialog:new({
+	"Find my two bugcatcher friends, and beat them!"
+		}),
+	npcYoungsterBen = Dialog:new({
+	"Guess you don't like shorts!"
+		}),
+		npcNerdJason = Dialog:new({
+	"I don't get it...",
+	"shorts, battles, what am I doing wrong?"
+		}),
 }
 local BoulderBadgeQuest = Quest:new()
 function BoulderBadgeQuest:new()
@@ -73,7 +98,7 @@ function BoulderBadgeQuest:isDoable()
 end
 
 function BoulderBadgeQuest:isDone()
-	return getAreaName() == "Pokecenter Route 3"
+	return getAreaName() == "Mt. Moon Pokémon Center"
 end
 
 -- in case of black out
@@ -151,21 +176,25 @@ function BoulderBadgeQuest:route2Up()
 end
 
 function BoulderBadgeQuest:PewterCity()
-if not  dialogs.npcBrock.state then
-    if not dialogs.npcDavePewter.state    then 
-	   return talkToNpcOnCell(22,55)
-	elseif   not game.isTeamFullyHealed() then
-		return moveToCell(35,48)
-	else
-		return moveToCell(30,26)
-	end 
-else 
-    if  not game.isTeamFullyHealed() then
-	    return moveToCell(35,48)
-	else
-		return moveToCell(89,46)
-	end
-end 
+	--if not hasBadge("Boulder Badge") then 
+	 if not  dialogs.npcBrock.state then
+		if not dialogs.npcDavePewter.state    then 
+		   return talkToNpcOnCell(22,55)
+		elseif   not game.isTeamFullyHealed() then
+			return moveToCell(35,48)
+		else
+			return moveToCell(30,26)
+		end 
+	 else 
+		if  not game.isTeamFullyHealed() then
+			return moveToCell(35,48)
+		else
+			return moveToCell(89,46)
+		end
+	 end 
+	--else 
+	--  return moveToCell(89,46)
+	--end 
 end 
 function BoulderBadgeQuest:PewterGym()
 	if dialogs.npcBrock.state or  not game.isTeamFullyHealed() then
@@ -185,10 +214,28 @@ function BoulderBadgeQuest:PewterGym()
 end
 
 function BoulderBadgeQuest:Route3()
-   if  not game.isTeamFullyHealed() then
-		return moveToArea("Pewter City")
-	else
-	return moveToArea("Pokecenter Route 3")
+    if  not game.isTeamFullyHealed() and  not dialogs.npcNerdJason.state then
+		return moveToCell(35,48)
+    elseif dialogs.npcHikerWilly2.state then 
+	     dialogs.npcHikerWilly.state = true 
+	elseif not dialogs.npcHikerWilly.state then
+	   return talkToNpcOnCell(109,43)
+	elseif not dialogs.npcYoungsterJosh.state then 
+	  return talkToNpcOnCell(106,52)
+	elseif isNpcOnCell(105,69) then 
+	 return talkToNpcOnCell(105,69)
+	elseif not dialogs.npcHikerWilly2.state then
+	   return talkToNpcOnCell(109,43)
+	elseif not dialogs.npcLassJanie.state then
+	   return talkToNpcOnCell(123,45)
+    elseif not dialogs.npcBugcatcherKent.state then
+	   return talkToNpcOnCell(131,54)
+    elseif not dialogs.npcYoungsterBen.state then
+	   return talkToNpcOnCell(148,55)
+	    elseif not dialogs.npcNerdJason.state then
+	   return talkToNpcOnCell(164,68)
+	elseif not game.isTeamFullyHealed() then 
+	   return moveToCell(178,48)
 	end 
 end
 
