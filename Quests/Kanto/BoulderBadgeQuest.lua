@@ -77,7 +77,7 @@ function BoulderBadgeQuest:isDone()
 end
 
 -- in case of black out
-function BoulderBadgeQuest:PokecenterViridian()
+function BoulderBadgeQuest:ViridianPokémonCenter()
 	return moveToArea("Viridian City")
 end
 
