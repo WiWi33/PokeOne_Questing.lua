@@ -83,6 +83,9 @@ local dialogs = {
 	"I don't get it...",
 	"shorts, battles, what am I doing wrong?"
 		}),
+		npcAndy = Dialog:new({
+	"The Museum in Pewter City is interested in the fossils found in Mt. Moon."
+		}),
 }
 local BoulderBadgeQuest = Quest:new()
 function BoulderBadgeQuest:new()
@@ -234,6 +237,8 @@ function BoulderBadgeQuest:Route3()
 	   return talkToNpcOnCell(148,55)
 	    elseif not dialogs.npcNerdJason.state then
 	   return talkToNpcOnCell(164,68)
+	    elseif not dialogs.npcAndy.state then
+	   return talkToNpcOnCell(189,49)
 	elseif not game.isTeamFullyHealed() then 
 	   return moveToCell(178,48)
 	end 
