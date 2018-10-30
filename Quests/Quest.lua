@@ -131,19 +131,10 @@ function Quest:needPokemart()
 	return false
 end
 
-function Quest:checkBadge()
-	countBadge = -1
-    countBadge = countBadges() 
-    return countBadge
-end
 
-function Quest:askForTrainerInfo()
-  return askForTrainerInfo()
-end 
 
 function Quest:useBikeAndOtherStuffs()
-	if not isTrainerInfoReceived()  or state == false then
-	        state = true
+	if not isTrainerInfoReceived()   then
            log("getting trainer info")
            return askForTrainerInfo()
 	end 

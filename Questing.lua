@@ -12,9 +12,12 @@ local QuestManager
 local questManager = nil
 
 function onStart()
+
+  
 	math.randomseed(os.time())
 	QuestManager = require "Quests/QuestManager"
 	questManager = QuestManager:new()
+
 end
 
 function onPause()
