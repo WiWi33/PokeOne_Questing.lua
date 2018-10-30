@@ -205,10 +205,14 @@ else
 		return moveToArea("Fisherman House - Vermilion")
 	elseif  countBadges() ~= 3 and hasItem("HM01")  then
 		if not game.hasPokemonWithMove("Cut") then
-		 --   for i=1,getTeamSize() do  				
-				useItemOnMove("HM01","Smokescreen",1)
-				--log("Pokemon: " .. i .. " Try Learning: HM01")
-		--	end 
+		    if self.pokemonId <= getTeamSize() then					
+				useItemOnPokemon("HM01", self.pokemonId)
+				log("Pokemon: " .. self.pokemonId .. " Try Learning: HM01")
+				self.pokemonId = self.pokemonId + 1
+				return
+			else
+				useItemOnPokemon("HM01", 1)
+			end
 		else
 			return moveToCel(107,142)
 		end
