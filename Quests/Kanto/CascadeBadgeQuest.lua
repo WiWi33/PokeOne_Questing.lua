@@ -56,8 +56,8 @@ end
 function CascadeBadgeQuest:CeruleanCity()
     if self:needPokecenter()  or not game.isTeamFullyHealed() then
 		return moveToCell(162,114)
-	elseif self:needPokemart() then
-		return moveToCell(166,133) -- pokemart
+	--elseif self:needPokemart() then
+	--	return moveToCell(166,133) -- pokemart
 	elseif  not self:isTrainingOver() then
 		return moveToCell(39,0)-- Route 24 Bridge'
 	elseif not isTrainerInfoReceived()   then
@@ -81,7 +81,7 @@ function CascadeBadgeQuest:CeruleanHouse6()
 end
 
 function CascadeBadgeQuest:CeruleanPokémonMart()
-	self:pokemart("Cerulean City")
+	self:pokemart(22,7)
 end
 
 function CascadeBadgeQuest:CeruleanPokémonCenter()

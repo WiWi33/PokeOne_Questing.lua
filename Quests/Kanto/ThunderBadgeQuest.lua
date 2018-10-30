@@ -202,6 +202,7 @@ else
 	    return talkToNpcOnCell(82,138)
 	elseif not self:isTrainingOver() then
 		return moveToArea("Route 6")
+	
 	elseif not hasItem("HM01") then -- Need do SSanne Quest
 		return talkToNpcOnCell(112,199) -- Enter on SSAnne
 	elseif not hasItem("Old Rod") then
@@ -221,13 +222,16 @@ else
 		else
 			return moveToCell(107,142)
 		end
+	elseif self:needPokemart() then
+	    return moveToCell(135,126)
 	elseif countBadges() == 3 then
-		return moveToArea("Route 11")
+		return moveToCell(183,139)
 	end
 end
 end 
 
-function ThunderBadgeQuest:VermilionPokemart()
+function ThunderBadgeQuest:VermilionPokémonMart()
+   self:pokemart(10,17,9,9)
 end
 
 

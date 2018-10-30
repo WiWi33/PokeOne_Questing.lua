@@ -79,26 +79,25 @@ end
 
 -- at a point in the game we'll always need to buy the same things
 -- use this function then
-function Quest:pokemart(exitMapName)
-	local pokeballCount = getItemQuantity("Pokeball")
+function Quest:pokemart(x,y,npcx,npcy)
+	local pokeballCount = getItemQuantity("Poké Ball")
 	local money         = getMoney()
 	if money >= 200 and pokeballCount < 10 then
 		if not isShopOpen() then
-		  if StringContains(getAreaName(), "Cerulean") then 
-		     return talkToNpcOnCell(22,7)
-		  else 
-			return talkToNpcOnCell(3,5)
-		  end 
+			return talkToNpcOnCell(npcx,npcy)
 		else
 			local pokeballToBuy = 10 - pokeballCount
 			local maximumBuyablePokeballs = money / 200
 			if maximumBuyablePokeballs < pokeballToBuy then
 				pokeballToBuy = maximumBuyablePokeballs
 			end
-			return buyItem("Pokeball", pokeballToBuy)
+			return buyItem("Poké Ball", pokeballToBuy)
+		
 		end
+	elseif isShopOpen() then 
+	    return closeShop()
 	else
-		return moveToArea(exitMapName)
+		return moveToCell(x,y)
 	end
 end
 
@@ -297,7 +296,7 @@ end
 	--getPokedexOwned() < 11
 	--then 
 	--and getAreaName() ~= "Route 22" then  
-   if  not isAlreadyCaught() and getPokedexOwned() < 11 and isOpponentShiny()   then 
+   if  not isAlreadyCaught() and getPokedexOwned() < 11    then 
     return useItem("Poké Ball") or  useItem("Repeat Ball")  or sendUsablePokemon() or run() or sendAnyPokemon()
    else 
    return  attack()  or useAnyMove() or run() or sendUsablePokemon()  or sendAnyPokemon()
