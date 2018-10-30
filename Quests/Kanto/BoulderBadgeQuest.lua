@@ -219,7 +219,7 @@ end
 function BoulderBadgeQuest:Route3()
     if  not game.isTeamFullyHealed() and  not dialogs.npcNerdJason.state then
 		return moveToCell(35,48)
-    elseif dialogs.npcHikerWilly2.state then 
+    elseif dialogs.npcHikerWilly2.state and not dialogs.npcHikerWilly.state  then 
 	     dialogs.npcHikerWilly.state = true 
 	elseif not dialogs.npcHikerWilly.state then
 	   return talkToNpcOnCell(109,43)
