@@ -89,7 +89,7 @@ local dialogs = {
 }
 local BoulderBadgeQuest = Quest:new()
 function BoulderBadgeQuest:new()
-	return Quest.new(BoulderBadgeQuest, name, description, 18 , dialogs)
+	return Quest.new(BoulderBadgeQuest, name, description, 18 , dialogs ,state)
 end
 
 function BoulderBadgeQuest:isDoable()
@@ -223,19 +223,19 @@ function BoulderBadgeQuest:Route3()
 	     dialogs.npcHikerWilly.state = true 
 	elseif not dialogs.npcHikerWilly.state then
 	   return talkToNpcOnCell(109,43)
-	elseif not dialogs.npcYoungsterJosh.state then 
-	  return talkToNpcOnCell(106,52)
+	--elseif not dialogs.npcYoungsterJosh.state then 
+	--  return talkToNpcOnCell(106,52)
 	elseif isNpcOnCell(105,69) then 
 	 return talkToNpcOnCell(105,69)
 	elseif not dialogs.npcHikerWilly2.state then
 	   return talkToNpcOnCell(109,43)
-	elseif not dialogs.npcLassJanie.state then
-	   return talkToNpcOnCell(123,45)
-    elseif not dialogs.npcBugcatcherKent.state then
-	   return talkToNpcOnCell(131,54)
-    elseif not dialogs.npcYoungsterBen.state then
-	   return talkToNpcOnCell(148,55)
-	    elseif not dialogs.npcNerdJason.state then
+	--elseif not dialogs.npcLassJanie.state then
+	 --  return talkToNpcOnCell(123,45)
+    --elseif not dialogs.npcBugcatcherKent.state then
+	--   return talkToNpcOnCell(131,54)
+    --elseif not dialogs.npcYoungsterBen.state then
+	--   return talkToNpcOnCell(148,55)
+    elseif not dialogs.npcNerdJason.state then
 	   return talkToNpcOnCell(164,68)
 	    elseif not dialogs.npcAndy.state then
 	   return talkToNpcOnCell(189,49)

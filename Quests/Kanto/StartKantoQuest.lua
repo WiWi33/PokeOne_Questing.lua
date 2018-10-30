@@ -48,7 +48,7 @@ local dialogs = {
 local StartKantoQuest = Quest:new()
 
 function StartKantoQuest:new()
-	return Quest.new(StartKantoQuest, name, description, 18 , dialogs)
+	return Quest.new(StartKantoQuest, name, description, 18 , dialogs , state)
 end
 
 function StartKantoQuest:isDoable()
