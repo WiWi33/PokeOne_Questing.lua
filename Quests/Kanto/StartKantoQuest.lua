@@ -48,7 +48,7 @@ local dialogs = {
 local StartKantoQuest = Quest:new()
 
 function StartKantoQuest:new()
-	return Quest.new(StartKantoQuest, name, description, 18 , dialogs)
+	return Quest.new(StartKantoQuest, name, description, 18 , dialogs , state)
 end
 
 function StartKantoQuest:isDoable()
@@ -124,7 +124,8 @@ function StartKantoQuest:ViridianCity()
         moveToCell(13, 21)
     elseif not dialogs.papi.state then 
         talkToNpcOnCell(142, 51)
-
+    else  
+	    moveToCell(142,48)  -- move to Route 2 to complete a quest 
     end
 end
 
