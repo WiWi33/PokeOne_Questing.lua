@@ -34,7 +34,7 @@ local dialogs = {
 local CascadeBadgeQuest = Quest:new()
 
 function CascadeBadgeQuest:new()
-	return Quest.new(CascadeBadgeQuest, name, description, level, dialogs , state)
+	return Quest.new(CascadeBadgeQuest, name, description, level, dialogs )
 end
 
 function CascadeBadgeQuest:isDoable()

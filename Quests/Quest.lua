@@ -12,7 +12,7 @@ local blacklist = require "blacklist"
 local Quest = {}
 
 
-function Quest:new(name, description, level, dialogs,state)
+function Quest:new(name, description, level, dialogs)
 	local o = {}
 	setmetatable(o, self)
 	self.__index     = self

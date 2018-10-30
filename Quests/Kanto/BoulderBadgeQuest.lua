@@ -89,7 +89,7 @@ local dialogs = {
 }
 local BoulderBadgeQuest = Quest:new()
 function BoulderBadgeQuest:new()
-	return Quest.new(BoulderBadgeQuest, name, description, 18 , dialogs ,state)
+	return Quest.new(BoulderBadgeQuest, name, description, 18 , dialogs )
 end
 
 function BoulderBadgeQuest:isDoable()
