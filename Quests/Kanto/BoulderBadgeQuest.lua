@@ -101,7 +101,7 @@ function BoulderBadgeQuest:isDoable()
 end
 
 function BoulderBadgeQuest:isDone()
-	return getAreaName() == "Mt. Moon Pokémon Center"
+	return getAreaName() == "Mt. Moon Pokémon Center" or getAreaName() == "Mt. Moon"
 end
 
 -- in case of black out
