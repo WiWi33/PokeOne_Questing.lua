@@ -32,7 +32,8 @@ local dialogs = {
 		"have been reset"
 	}),
 	switchTrigger = Dialog:new({
-		"have triggered the first switch"
+		"Already used",
+		"Nothing"
 	})
 }
 
@@ -183,7 +184,9 @@ if game.inRectangle(5, 38,17, 46) then
 	return talkToNpcOnCell(14,38)
 	else 
 	   return moveToCell(9,45)
-    end 
+    end
+elseif not game.isTeamFullyHealed() and  game.inRectangle(101, 140,118, 147) and isNpcOnCell(115,140) then 
+  return talkToNpcOnCell(115,140)
 else
     if not isTrainerInfoReceived()   then
            log("getting trainer info")
@@ -213,8 +216,10 @@ else
 			else
 				useItemOnPokemon("HM01", 1)
 			end
+		elseif isNpcOnCell(115,140) then 
+		   return talkToNpcOnCell(115,140)
 		else
-			return moveToCel(107,142)
+			return moveToCell(107,142)
 		end
 	elseif countBadges() == 3 then
 		return moveToArea("Route 11")
@@ -232,8 +237,8 @@ end
 function ThunderBadgeQuest:puzzleBinPosition(binId)
 	local xCount = 5
 	local yCount = 3
-	local xPosition = 2
-	local yPosition = 17
+	local xPosition = 83
+	local yPosition = 84
 	local spaceBetweenBins = 2
 	
 	local line   = math.floor(binId / xCount + 1)
@@ -249,44 +254,34 @@ function ThunderBadgeQuest:solvePuzzle()
 	if not self.puzzle.bin then
 		self.puzzle.bin = 1
 	end
-	if self.dialogs.switchWrong.state then
-		self.dialogs.switchWrong.state = false
+
+	
+	if self.dialogs.switchTrigger.state then 
 		self.dialogs.switchTrigger.state = false
 		self.puzzle.bin = self.puzzle.bin + 1
-	elseif self.dialogs.switchTrigger.state and not self.puzzle.firstBin then
-		self.puzzle.firstBin = self.puzzle.bin
-		self.puzzle.bin = 1 -- we know the first bin, let start again
-	end
-	
-	if not self.dialogs.switchTrigger.state and self.puzzle.firstBin then
-		local x, y = self:puzzleBinPosition(self.puzzle.firstBin)
-		return talkToNpcOnCell(x, y)
-	else
+	end 
+
+	if not self.dialogs.switchTrigger.state  then
 		local x, y = self:puzzleBinPosition(self.puzzle.bin)
 		return talkToNpcOnCell(x, y)
 	end
 end
 
 function ThunderBadgeQuest:VermilionGym()
-	if not game.isTeamFullyHealed() and countBadges() == 3 then
- 		return moveToArea("Vermilion City")
-	elseif hasItem("TM28") and not hasMove(1,"Dig") and getPokemonName(1) == "Mankey" then
-		  useItemOnPokemon("TM28",1)
-	else
-		if hasItem("Thunder Badge") then
-			if not hasItem("TM24")  or getItemQuantity("TM24") < 2 then
-				return talkToNpcOnCell(10,20)
-			else
-				return moveToArea("Vermilion City")
-			end
+	   if not game.isTeamFullyHealed() or  countBadges() == 3 then
+ 		return moveToCell(87,90)
+	   else
+		if countBadges() == 3 then
+				return moveToCell(87,90)
 		else
-			if not isNpcOnCell(6, 10) then
-				return talkToNpcOnCell(6,4)
+			if not isNpcOnCell(87, 76) then
+				return talkToNpcOnCell(87,71)
 			else
 				return self:solvePuzzle()
 			end
 		end
-	end
+	   end
+	-- end 
 end
 
 return ThunderBadgeQuest
