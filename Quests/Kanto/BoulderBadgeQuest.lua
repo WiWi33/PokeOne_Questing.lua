@@ -237,10 +237,12 @@ function BoulderBadgeQuest:Route3()
 	--   return talkToNpcOnCell(148,55)
     elseif not dialogs.npcNerdJason.state then
 	   return talkToNpcOnCell(164,68)
-	    elseif not dialogs.npcAndy.state then
+	elseif not dialogs.npcAndy.state then
 	   return talkToNpcOnCell(189,49)
 	elseif not game.isTeamFullyHealed() then 
 	   return moveToCell(178,48)
+	else 
+	    return moveToCell(188,47)
 	end 
 end
 
