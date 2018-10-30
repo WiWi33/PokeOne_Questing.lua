@@ -21,7 +21,7 @@ local dialogs = {
 
 local MoonFossilQuest = Quest:new()
 function MoonFossilQuest:new()
-	return Quest.new(MoonFossilQuest, name, description, level, dialogs ,state)
+	return Quest.new(MoonFossilQuest, name, description, level, dialogs )
 end
 
 function MoonFossilQuest:isDoable()

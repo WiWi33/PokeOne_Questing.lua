@@ -89,7 +89,7 @@ local dialogs = {
 }
 local BoulderBadgeQuest = Quest:new()
 function BoulderBadgeQuest:new()
-	return Quest.new(BoulderBadgeQuest, name, description, 18 , dialogs ,state)
+	return Quest.new(BoulderBadgeQuest, name, description, 18 , dialogs )
 end
 
 function BoulderBadgeQuest:isDoable()
@@ -101,7 +101,7 @@ function BoulderBadgeQuest:isDoable()
 end
 
 function BoulderBadgeQuest:isDone()
-	return getAreaName() == "Mt. Moon Pokémon Center"
+	return getAreaName() == "Mt. Moon Pokémon Center" or getAreaName() == "Mt. Moon"
 end
 
 -- in case of black out
@@ -219,7 +219,7 @@ end
 function BoulderBadgeQuest:Route3()
     if  not game.isTeamFullyHealed() and  not dialogs.npcNerdJason.state then
 		return moveToCell(35,48)
-    elseif dialogs.npcHikerWilly2.state and not dialogs.npcHikerWilly.state then
+    elseif dialogs.npcHikerWilly2.state and not dialogs.npcHikerWilly.state  then 
 	     dialogs.npcHikerWilly.state = true 
 	elseif not dialogs.npcHikerWilly.state then
 	   return talkToNpcOnCell(109,43)
@@ -237,10 +237,12 @@ function BoulderBadgeQuest:Route3()
 	--   return talkToNpcOnCell(148,55)
     elseif not dialogs.npcNerdJason.state then
 	   return talkToNpcOnCell(164,68)
-	    elseif not dialogs.npcAndy.state then
+	elseif not dialogs.npcAndy.state then
 	   return talkToNpcOnCell(189,49)
 	elseif not game.isTeamFullyHealed() then 
 	   return moveToCell(178,48)
+	else 
+	    return moveToCell(188,47)
 	end 
 end
 

@@ -12,7 +12,7 @@ local blacklist = require "blacklist"
 local Quest = {}
 
 
-function Quest:new(name, description, level, dialogs,state)
+function Quest:new(name, description, level, dialogs)
 	local o = {}
 	setmetatable(o, self)
 	self.__index     = self
@@ -206,6 +206,7 @@ function Quest:advanceSorting()
 					end
 				end
 	end
+	return sortTeamRangeByLevelDescending(1, pokemonsUsable)
 end
 
 
@@ -299,7 +300,7 @@ end
    if  not isAlreadyCaught() and getPokedexOwned() < 11 and isOpponentShiny()   then 
     return useItem("Poké Ball") or  useItem("Repeat Ball")  or sendUsablePokemon() or run() or sendAnyPokemon()
    else 
-   return  attack() or run() or sendUsablePokemon()  or sendAnyPokemon()
+   return  attack()  or useAnyMove() or run() or sendUsablePokemon()  or sendAnyPokemon()
    end 
 --end
 
@@ -328,11 +329,11 @@ if getPokemonLevel(1) < getOpponentLevel() then
 
 else 
 
-return attack() or sendAnyPokemon()  or run()
+return attack() or useAnyMove()  or sendAnyPokemon()  or run()
 end 
 end
 function Quest:trainerBattle()
-
+    
 	if  sys.canSwitch  == false then 
 	return game.useAnyMove()
 	end
@@ -527,7 +528,13 @@ elseif getPokemonName(1) == "Dratini" then
    elseif getPokemonName(1)  == "Swampert"  and getPokemonLevel(1) >=70 then 
   return  forgetAnyMoveExcept({"Ice Beam","Dig","Dive","Earthquake"})
   else
-	return forgetAnyMoveExcept({"Dig", "Shadow Ball", "Dark Pulse", "Surf", "Hex", "Air Slash", "Cut", "Acrobatics", "Poison Fang", "Thunderbolt", "Sleep Powder",  "Petal Dance","Dragon Rage","Spark","Signal Beam","Ice Fang","Discharge","Electro Ball","Rock Smash","Surf","Dig","Dive","Sucker Punch","Play Rough","Earthquake","Sleep Powder", "Cut","Flamethrower","Fire Fang","Covet", "Shadow Ball", "Shadow Claw", "Blaze Kick", "Dragon Claw", "Psychic", "Night Slash", "X-Scissor", "Razor Wind", "Earthquake", "Ice Beam", "Megahorn", "Wild charge", "Crunch", "Air Slash", "FlameThrower", "Poison Jab", "Ice Fang", "Thunder Fang", "Fire Fang", "Play Rough", "Bite", "Covet", "Low Kick", "Quick Attack", "Ice Punch", "Thunder Punch", "Fire Punch", "Sky Uppercut", "Thunderbolt", "Thunder", "Thrash", "Horn Attack", "Nuzzle", "HeadButt", "False Swipe", "Fire Blast","Rock Smash"}) 
+	return forgetAnyMoveExcept({"Dig", "Shadow Ball", "Dark Pulse", "Surf", "Hex", "Air Slash", "Cut", "Acrobatics", "Poison Fang", "Thunderbolt", 
+	"Sleep Powder",  "Petal Dance","Dragon Rage","Spark","Signal Beam","Ice Fang",
+	"Discharge","Electro Ball","Rock Smash","Surf","Dig","Dive","Sucker Punch","Play Rough","Earthquake","Sleep Powder", 
+	"Cut","Flamethrower","Fire Fang","Covet", "Shadow Ball", "Shadow Claw", "Blaze Kick", "Dragon Claw", "Psychic", "Night Slash",
+	"X-Scissor", "Razor Wind", "Earthquake", "Ice Beam", "Megahorn", "Wild charge", "Crunch", "Air Slash", "FlameThrower", "Poison Jab",
+	"Ice Fang", "Thunder Fang", "Fire Fang", "Play Rough", "Bite", "Covet", "Low Kick", "Quick Attack", "Ice Punch", "Thunder Punch", "Fire Punch",
+	"Sky Uppercut", "Thunderbolt", "Thunder", "Thrash", "Horn Attack", "Nuzzle", "HeadButt", "False Swipe", "Fire Blast","Rock Smash"}) 
 end 
 end
 end 

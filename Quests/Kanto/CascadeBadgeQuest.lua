@@ -24,13 +24,17 @@ local dialogs = {
 	billTicketDone = Dialog:new({
 		"Good luck!",
 		"And remember: expect the unexpected!"
-	})
+	}),
+	pokebill = Dialog:new({
+	     "Good luck!",
+		"And remember: expect the unexpected!"
+	}),
 }
 
 local CascadeBadgeQuest = Quest:new()
 
 function CascadeBadgeQuest:new()
-	return Quest.new(CascadeBadgeQuest, name, description, level, dialogs , state)
+	return Quest.new(CascadeBadgeQuest, name, description, level, dialogs )
 end
 
 function CascadeBadgeQuest:isDoable()
@@ -55,13 +59,16 @@ function CascadeBadgeQuest:CeruleanCity()
 	elseif self:needPokemart() then
 		return moveToCell(166,133) -- pokemart
 	elseif  not self:isTrainingOver() then
-		return moveToCell(39,0)-- Route 24 Bridge
+		return moveToCell(39,0)-- Route 24 Bridge'
+	elseif not isTrainerInfoReceived()   then
+           log("getting trainer info")
+           return askForTrainerInfo()
 	elseif countBadges() <= 1 and countBadges() >= 0  then
 		return moveToCell(177,114) -- 2nd Gym
-    elseif not hasItem("Bill Ticket") then 
-	     return moveToCell(39,0)
+    elseif not hasItem("S.S. Ticket") then 
+	     return moveToCell(183,73)
 	else
-		return moveToCell(23,50) -- Route 5
+		return moveToCell(155,138) -- Route 5
 	end
 end
 
@@ -88,41 +95,39 @@ end
 
 
 function CascadeBadgeQuest:Route24()
+if not hasItem("S.S. Ticket") then
 	moveToCell(233,24)
+else 
+   moveToCell(190,80)
+end 
 end
 
 function CascadeBadgeQuest:Route25()
-	if not dialogs.billTicketDone.state then -- RocketGuy -> Give Nugget($15.000)
-		return moveToCell(256,19)
-	elseif not dialogs.billTicketDone.state then
-		return moveToMap("Bills House")
+	if not hasItem("S.S. Ticket") then -- RocketGuy -> Give Nugget($15.000)
+		return moveToCell(284,15)
 	else
-		moveToCell(14, 30)
+		moveToCell(197,29)
 	end
 end
 
-function CascadeBadgeQuest:BillsHouse() -- get ticket 
-	if dialogs.billTicketDone.state then
-		return moveToMap("Route 25")
+function CascadeBadgeQuest:SeaCottage() -- get ticket 
+	if hasItem("S.S. Ticket") then
+		return moveToCell(11,14)
 	else
-		if dialogs.bookPillowDone.state then
-			return talkToNpcOnCell(11, 3)
+		if isNpcOnCell(14,10) then
+			return talkToNpcOnCell(14, 10)
 		else
-			return talkToNpcOnCell(18, 2)
+			return talkToNpcOnCell(9,10)
 		end
 	end
 end
 
-function CascadeBadgeQuest:ItemManiacHouse() -- sell nugget
-	if hasItem("Nugget") then
-		return talkToNpcOnCell(6, 5)
-	else
-		return moveToMap("Route 25")
-	end
-end
 
 function CascadeBadgeQuest:CeruleanGym() -- get Cascade Badge
-	if  not game.isTeamFullyHealed() then
+		if not isTrainerInfoReceived()   then
+           log("getting trainer info")
+           return askForTrainerInfo()
+		   elseif  not game.isTeamFullyHealed() then
 		return moveToCell(51,136)
 	elseif countBadges() <= 1 and ccountBadges() >= 0 then
 		return talkToNpcOnCell(51, 109)
