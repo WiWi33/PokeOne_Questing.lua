@@ -122,13 +122,6 @@ function CascadeBadgeQuest:SeaCottage() -- get ticket
 	end
 end
 
-function CascadeBadgeQuest:ItemManiacHouse() -- sell nugget
-	if hasItem("Nugget") then
-		return talkToNpcOnCell(6, 5)
-	else
-		return moveToMap("Route 25")
-	end
-end
 
 function CascadeBadgeQuest:CeruleanGym() -- get Cascade Badge
 		if not isTrainerInfoReceived()   then

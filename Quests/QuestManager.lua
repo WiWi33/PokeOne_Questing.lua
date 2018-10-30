@@ -10,7 +10,7 @@ local StartKantoQuest     = require('Quests/Kanto/StartKantoQuest')
 local BoulderBadgeQuest   = require('Quests/Kanto/BoulderBadgeQuest')
 local MoonFossilQuest     = require('Quests/Kanto/MoonFossilQuest')
 local CascadeBadgeQuest   = require('Quests/Kanto/CascadeBadgeQuest')
-
+local ThunderBadgeQuest   = require('Quests/Kanto/ThunderBadgeQuest')
 
 
 
@@ -21,6 +21,7 @@ local quests = {
 	BoulderBadgeQuest:new(),
 	MoonFossilQuest:new(),
 	CascadeBadgeQuest:new(),
+	ThunderBadgeQuest:new(),
 }
 
 function QuestManager:new(o)
