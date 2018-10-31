@@ -61,7 +61,7 @@ function ThunderBadgeQuest:isDoable()
 end
 
 function ThunderBadgeQuest:isDone()
-	if ( getMapName() == "Route 11"   or getMapName() == "Route 5" )   then
+	if ( getMapName() == "Route 10" )   then
 		return true
 	else
 		return false
@@ -104,7 +104,7 @@ function ThunderBadgeQuest:Route5()
     if not isTrainerInfoReceived()   then
            log("getting trainer info")
            return askForTrainerInfo()
-	elseif countBadges() == 3 and hasItem("HM05 - Flash") then 
+	elseif countBadges() == 3 and hasItem("HM09") then 
 		return moveToCell(157,138)
 	else
 		return moveToCell(157,189)
@@ -122,7 +122,7 @@ function ThunderBadgeQuest:UndergroundPath()
            return askForTrainerInfo()
  else 
 	 if game.inRectangle(4, 2,14, 10) then
-		if countBadges() == 3 and hasItem("HM05 - Flash") then 
+		if countBadges() == 3 and hasItem("HM09") then 
 		return moveToCell(8,9)
 		else
 		return moveToCell(11,5)
@@ -130,13 +130,13 @@ function ThunderBadgeQuest:UndergroundPath()
 	 elseif game.inRectangle(1, 26,14, 70) then
 	    if isNpcOnCell(12,63) then 
 		  return talkToNpcOnCell(12,63) -- Full Restore
-		elseif countBadges() == 3 and hasItem("HM05 - Flash") then
+		elseif countBadges() == 3 and hasItem("HM09") then
 		  return moveToCell(7,28)
 		else
 		  return moveToCell(7,67)
 		end
      else
-         	 if countBadges() == 3 and hasItem("HM05 - Flash") then
+         	 if countBadges() == 3 and hasItem("HM09") then
 		  return moveToCell(11,83)
 		else
 		  return moveToCell(8,87)
@@ -151,7 +151,7 @@ function ThunderBadgeQuest:Route6()
 	if not isTrainerInfoReceived()   then
            log("getting trainer info")
            return askForTrainerInfo()
-    elseif  countBadges() == 3 and hasItem("HM05 - Flash") then
+    elseif  countBadges() == 3 and hasItem("HM09")  then
 	     return  moveToCell(127,27)
 	elseif not dialogs.Isa.state then
 		return talkToNpcOnCell(124, 48) -- picnicker isa
@@ -193,7 +193,7 @@ else
            return askForTrainerInfo()
 	elseif self:needPokecenter() or not game.isTeamFullyHealed()  then
 		return moveToCell(107,105)
-    elseif  countBadges() == 3 and hasItem("HM05 - Flash") then 
+    elseif  countBadges() == 3 and hasItem("HM09") then 
 		return moveToCell(120,84)
 	elseif not dialogs.fishingbook3.state and not hasItem("Old Rod") then 
 		return moveToCell(99,103)
@@ -224,8 +224,10 @@ else
 		end
 	elseif self:needPokemart() then
 	    return moveToCell(135,126)
-	elseif countBadges() == 3 then
-		return moveToCell(183,139)
+	--elseif countBadges() == 3 then--and getPokedexOwned() < 11  then
+	--	return moveToCell(183,139)
+	elseif countBadges() == 3  and not hasItem("HM09") then --and getPokedexOwned() >= 11 and not hasItem("HM09") then 
+	    return moveToCell(167,132)
 	end
 end
 end 
@@ -235,8 +237,51 @@ function ThunderBadgeQuest:VermilionPokémonMart()
 end
 
 
+function ThunderBadgeQuest:Route11()
+    if getPokemonHealthPercent(1) < 50 or self:needPokemart() then 
+	   return moveToCell(174,137)
+    --elseif  getPokedexOwned() < 11    then 
+    --return moveToGrass()
+	elseif not hasItem("HM09") then 
+	return moveToCell(174,137)
+	end 
+	
+end
 
 
+function ThunderBadgeQuest:Route2()
+    if not hasItem("HM09") then 
+	return talkToNpcOnCell(34,97)
+	else 
+	  return moveToCell(34,92)
+	end 
+	
+end
+
+function ThunderBadgeQuest:DiglettsCave()
+if game.inRectangle(38,87,51,96) then
+    if getPokemonHealthPercent(1) < 50 or self:needPokemart() then 
+	   return moveToCell(41,95)
+	elseif not hasItem("HM09") then 
+	return moveToCell(48,91)
+	else 
+	 return moveToCell(41,95)
+	end 
+elseif 	game.inRectangle(12,5,45,62) then
+   if not hasItem("HM09") then 
+	 return moveToCell(15,9)
+   else
+     return moveToCell(42,58)
+   end 
+else 
+       if not hasItem("HM09") then 
+	 return moveToCell(8,94)
+   else
+    return moveToCell(13,88)
+   end
+end
+
+end 
 
 function ThunderBadgeQuest:puzzleBinPosition(binId)
 	local xCount = 5

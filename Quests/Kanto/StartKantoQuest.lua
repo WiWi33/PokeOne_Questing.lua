@@ -12,6 +12,7 @@ local name        = 'StartKantoQuest'
 local description = 'Getting starter and finishing Viridian City quests!'
 local dialogs = {
 	momTalk = Dialog:new({
+	"Right. All girls leave home someday. It said so on TV.",
     "Right. All boys leave home someday.",
     "Oh good! You and your Pokémon are looking great! Take care now!"
         }),

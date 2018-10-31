@@ -278,57 +278,52 @@ function Quest:wildBattle()
 if getTeamSize() >0 then
 
 if  getAreaName() == "Mt. Moon B2F" or getAreaName() == "Mt. Moon"
- or getAreaName() == "Mt. Moon B1F" or getAreaName() == "Route 7" or getAreaName() == "Seafoam B4F"   then  
-     return run()  or sendUsablePokemon()  or sendAnyPokemon()
+ or getAreaName() == "Mt. Moon B1F" or getAreaName() == "Diglett's Cave" or getAreaName() == "Seafoam B4F"   then  
+     return run()  or sendUsablePokemon()  or sendAnyPokemon() or attack()
 end	
  
 if isOpponentShiny()   then -- formal catch
-		if useItem("Ultra Ball") or useItem("Great Ball") or useItem("Pokeball") or sendUsablePokemon() or run() or sendAnyPokemon() then
+		if useItem("Ultra Ball") or useItem("Great Ball") or useItem("Poké Ball") or sendUsablePokemon() or run() or sendAnyPokemon() then
 			return true
-			
 		end
 end
 
 
---if  -- not hasItem("HM05 - Flash")  
-	--and not sys.tableHasValue(blackListTargets, getOpponentName())  
-	--and 
-	--getPokedexOwned() < 11
-	--then 
-	--and getAreaName() ~= "Route 22" then  
-   if  not isAlreadyCaught() and getPokedexOwned() < 11    then 
-    return useItem("Poké Ball") or  useItem("Repeat Ball")  or sendUsablePokemon() or run() or sendAnyPokemon()
-   else 
-   return  attack()  or useAnyMove() or run() or sendUsablePokemon()  or sendAnyPokemon()
-   end 
+
+ --  if  not isAlreadyCaught() and getPokedexOwned() < 11 
+ --and not sys.tableHasValue(blackListTargets, getOpponentName())    then 
+  --  return useItem("Poké Ball")   or sendUsablePokemon() or run() or sendAnyPokemon()
+ -- else
+ --  return attack() or useAnyMove()  or sendAnyPokemon()  or run()
+ --  end 
+	
+
+
+--if (getPokemonLevel(1) - 55 < getOpponentLevel()  ) and getPokemonName(1) == "Magikarp"  then
+	--	local opponentLevel = getOpponentLevel()
+	--	local myPokemonLvl  = getPokemonLevel(getActivePokemonNumber())
+	---	if opponentLevel >= (myPokemonLvl - 55) and getPokemonName(getActivePokemonNumber()) == "Magikarp" then
+	--		local requestedId, requestedLevel = game.getMaxLevelUsablePokemon()
+	---		if requestedId ~= nil and (requestedLevel >  (myPokemonLvl - 55) ) then
+	---			return sendPokemon(requestedId)
+	--		end
+	--	end
 --end
 
+--if getPokemonLevel(1) < getOpponentLevel() then
+	--	local opponentLevel = getOpponentLevel()
+	--	local myPokemonLvl  = getPokemonLevel(getActivePokemonNumber())
+	---	if opponentLevel >= myPokemonLvl then
+	--		local requestedId, requestedLevel = game.getMaxLevelUsablePokemon()
+	---		if requestedId ~= nil and requestedLevel > myPokemonLvl then
+	---			return sendPokemon(requestedId)
+	---		end
+	--	end
+	--end
 
-if (getPokemonLevel(1) - 55 < getOpponentLevel()  ) and getPokemonName(1) == "Magikarp"  then
-		local opponentLevel = getOpponentLevel()
-		local myPokemonLvl  = getPokemonLevel(getActivePokemonNumber())
-		if opponentLevel >= (myPokemonLvl - 55) and getPokemonName(getActivePokemonNumber()) == "Magikarp" then
-			local requestedId, requestedLevel = game.getMaxLevelUsablePokemon()
-			if requestedId ~= nil and (requestedLevel >  (myPokemonLvl - 55) ) then
-				return sendPokemon(requestedId)
-			end
-		end
-end
+--else 
 
-if getPokemonLevel(1) < getOpponentLevel() then
-		local opponentLevel = getOpponentLevel()
-		local myPokemonLvl  = getPokemonLevel(getActivePokemonNumber())
-		if opponentLevel >= myPokemonLvl then
-			local requestedId, requestedLevel = game.getMaxLevelUsablePokemon()
-			if requestedId ~= nil and requestedLevel > myPokemonLvl then
-				return sendPokemon(requestedId)
-			end
-		end
-	end
-
-else 
-
-return attack() or useAnyMove()  or sendAnyPokemon()  or run()
+return attack() or useAnyMove()  or run() or sendUsablePokemon() or sendAnyPokemon()  
 end 
 end
 function Quest:trainerBattle()
