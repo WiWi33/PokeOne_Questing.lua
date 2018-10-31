@@ -7,12 +7,10 @@ local QuestManager = {}
 local disable = false
 --Kanto
 local StartKantoQuest     = require('Quests/Kanto/StartKantoQuest')
---local PalletStartQuest    = require('Quests/Kanto/PalletStartQuest')
---local ViridianSchoolQuest = require('Quests/Kanto/ViridianSchoolQuest')
 local BoulderBadgeQuest   = require('Quests/Kanto/BoulderBadgeQuest')
---local MoonFossilQuest     = require('Quests/Kanto/MoonFossilQuest')
---local CascadeBadgeQuest   = require('Quests/Kanto/CascadeBadgeQuest')
-
+local MoonFossilQuest     = require('Quests/Kanto/MoonFossilQuest')
+local CascadeBadgeQuest   = require('Quests/Kanto/CascadeBadgeQuest')
+local ThunderBadgeQuest   = require('Quests/Kanto/ThunderBadgeQuest')
 
 
 
@@ -20,11 +18,10 @@ local BoulderBadgeQuest   = require('Quests/Kanto/BoulderBadgeQuest')
 local quests = {
 	-- Kanto Quests
 	StartKantoQuest:new(),
-	--PalletStartQuest:new(),
-	--ViridianSchoolQuest:new(),
-	BoulderBadgeQuest:new()
-	--MoonFossilQuest:new(),
-	--CascadeBadgeQuest:new()
+	BoulderBadgeQuest:new(),
+	MoonFossilQuest:new(),
+	CascadeBadgeQuest:new(),
+	ThunderBadgeQuest:new(),
 }
 
 function QuestManager:new(o)

@@ -20,11 +20,10 @@ function Quest:new(name, description, level, dialogs)
 	o.description = description
 	o.level       = level or 1
 	o.dialogs     = dialogs
+	o.state       = true
 	o.training    = true
 	return o
 end
-
-
 
 function Quest:isDoable()
 	sys.error("Quest:isDoable", "function is not overloaded in quest: " .. self.name)
@@ -83,11 +82,15 @@ end
 function Quest:pokemart(exitMapName)
 	local pokeballCount = getItemQuantity("Pokeball")
 	local money         = getMoney()
-	if money >= 200 and pokeballCount < 50 then
+	if money >= 200 and pokeballCount < 10 then
 		if not isShopOpen() then
+		  if StringContains(getAreaName(), "Cerulean") then 
+		     return talkToNpcOnCell(22,7)
+		  else 
 			return talkToNpcOnCell(3,5)
+		  end 
 		else
-			local pokeballToBuy = 50 - pokeballCount
+			local pokeballToBuy = 10 - pokeballCount
 			local maximumBuyablePokeballs = money / 200
 			if maximumBuyablePokeballs < pokeballToBuy then
 				pokeballToBuy = maximumBuyablePokeballs
@@ -122,11 +125,21 @@ end
 
 function Quest:needPokemart()
 	-- TODO: ItemManager
-	if getItemQuantity("Pokeball") < 20 and getMoney() >= 200 then
+	if getItemQuantity("Poké ball") < 10 and getMoney() >= 200 then
 		return true
 	end
 	return false
 end
+
+
+
+function Quest:useBikeAndOtherStuffs()
+	if not isTrainerInfoReceived()   then
+           log("getting trainer info")
+           return askForTrainerInfo()
+	end 
+end
+
 
 function Quest:needPokecenter()
 
@@ -186,7 +199,6 @@ function Quest:advanceSorting()
 				end
 	end
 	
-	
 		 if hasPokemonInTeam("Charmander")  and  not hasItem("Soul Badge") and not hasItem("HM03 - Surf")  then
 		for i=1,getTeamSize() do 
 				   if  getPokemonName(i) == "Charmander" and isPokemonUsable(i) then 
@@ -194,6 +206,7 @@ function Quest:advanceSorting()
 					end
 				end
 	end
+	return sortTeamRangeByLevelDescending(1, pokemonsUsable)
 end
 
 
@@ -265,8 +278,9 @@ local blackListTargets = { --it will kill this targets instead catch
 function Quest:wildBattle()
 if getTeamSize() >0 then
 
-if game.getTotalUsablePokemonCount() < getTeamSize()  and  (getAreaName() == "Route 2" or getAreaName() == "Route 6" or getAreaName() == "Mt. Moon 1F" or getAreaName() == "Route 24" or getAreaName() == "Route 7" or getAreaName() == "Seafoam B4F")   then  
-     return relog(1,"Relogggg!!!")
+if  getAreaName() == "Mt. Moon B2F" or getAreaName() == "Mt. Moon"
+ or getAreaName() == "Mt. Moon B1F" or getAreaName() == "Route 7" or getAreaName() == "Seafoam B4F"   then  
+     return run()  or sendUsablePokemon()  or sendAnyPokemon()
 end	
  
 if isOpponentShiny()   then -- formal catch
@@ -283,10 +297,10 @@ end
 	--getPokedexOwned() < 11
 	--then 
 	--and getAreaName() ~= "Route 22" then  
-   if  not isAlreadyCaught() and getPokedexOwned() < 11  then 
+   if  not isAlreadyCaught() and getPokedexOwned() < 11 and isOpponentShiny()   then 
     return useItem("Poké Ball") or  useItem("Repeat Ball")  or sendUsablePokemon() or run() or sendAnyPokemon()
    else 
-   return  attack() or run() or sendUsablePokemon()  or sendAnyPokemon()
+   return  attack()  or useAnyMove() or run() or sendUsablePokemon()  or sendAnyPokemon()
    end 
 --end
 
@@ -315,11 +329,11 @@ if getPokemonLevel(1) < getOpponentLevel() then
 
 else 
 
-return attack() or sendAnyPokemon()  or run()
+return attack() or useAnyMove()  or sendAnyPokemon()  or run()
 end 
 end
 function Quest:trainerBattle()
-
+    
 	if  sys.canSwitch  == false then 
 	return game.useAnyMove()
 	end
@@ -514,7 +528,13 @@ elseif getPokemonName(1) == "Dratini" then
    elseif getPokemonName(1)  == "Swampert"  and getPokemonLevel(1) >=70 then 
   return  forgetAnyMoveExcept({"Ice Beam","Dig","Dive","Earthquake"})
   else
-	return forgetAnyMoveExcept({"Dig", "Shadow Ball", "Dark Pulse", "Surf", "Hex", "Air Slash", "Cut", "Acrobatics", "Poison Fang", "Thunderbolt", "Sleep Powder",  "Petal Dance","Dragon Rage","Spark","Signal Beam","Ice Fang","Discharge","Electro Ball","Rock Smash","Surf","Dig","Dive","Sucker Punch","Play Rough","Earthquake","Sleep Powder", "Cut","Flamethrower","Fire Fang","Covet", "Shadow Ball", "Shadow Claw", "Blaze Kick", "Dragon Claw", "Psychic", "Night Slash", "X-Scissor", "Razor Wind", "Earthquake", "Ice Beam", "Megahorn", "Wild charge", "Crunch", "Air Slash", "FlameThrower", "Poison Jab", "Ice Fang", "Thunder Fang", "Fire Fang", "Play Rough", "Bite", "Covet", "Low Kick", "Quick Attack", "Ice Punch", "Thunder Punch", "Fire Punch", "Sky Uppercut", "Thunderbolt", "Thunder", "Thrash", "Horn Attack", "Nuzzle", "HeadButt", "False Swipe", "Fire Blast","Rock Smash"}) 
+	return forgetAnyMoveExcept({"Dig", "Shadow Ball", "Dark Pulse", "Surf", "Hex", "Air Slash", "Cut", "Acrobatics", "Poison Fang", "Thunderbolt", 
+	"Sleep Powder",  "Petal Dance","Dragon Rage","Spark","Signal Beam","Ice Fang",
+	"Discharge","Electro Ball","Rock Smash","Surf","Dig","Dive","Sucker Punch","Play Rough","Earthquake","Sleep Powder", 
+	"Cut","Flamethrower","Fire Fang","Covet", "Shadow Ball", "Shadow Claw", "Blaze Kick", "Dragon Claw", "Psychic", "Night Slash",
+	"X-Scissor", "Razor Wind", "Earthquake", "Ice Beam", "Megahorn", "Wild charge", "Crunch", "Air Slash", "FlameThrower", "Poison Jab",
+	"Ice Fang", "Thunder Fang", "Fire Fang", "Play Rough", "Bite", "Covet", "Low Kick", "Quick Attack", "Ice Punch", "Thunder Punch", "Fire Punch",
+	"Sky Uppercut", "Thunderbolt", "Thunder", "Thrash", "Horn Attack", "Nuzzle", "HeadButt", "False Swipe", "Fire Blast","Rock Smash"}) 
 end 
 end
 end 
