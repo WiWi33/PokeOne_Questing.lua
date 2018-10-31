@@ -254,7 +254,7 @@ else
 end
 end 
 function BoulderBadgeQuest:PewterPokemart()
-	self:pokemart("Pewter City")
+	self:pokemart(1,1,1,1)
 end
 
 return BoulderBadgeQuest
