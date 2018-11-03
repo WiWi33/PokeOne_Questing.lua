@@ -129,7 +129,7 @@ function CascadeBadgeQuest:CeruleanGym() -- get Cascade Badge
            return askForTrainerInfo()
 		   elseif  not game.isTeamFullyHealed() then
 		return moveToCell(51,136)
-	elseif countBadges() <= 1 and ccountBadges() >= 0 then
+	elseif countBadges() <= 1 and countBadges() >= 0 then
 		return talkToNpcOnCell(51, 109)
 	elseif countBadges() == 2  and not dialogs.npcafterbeat.state then 
 	     return talkToNpcOnCell(55, 131)
