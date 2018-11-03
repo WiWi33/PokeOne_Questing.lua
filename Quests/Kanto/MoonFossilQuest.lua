@@ -59,12 +59,12 @@ end
 function MoonFossilQuest:MtMoonB1F()
      
 	if game.inRectangle(4, 128, 25, 147) then
-	if  not game.isTeamFullyHealed()then
-	return moveToCell(6, 130)
+	--if  not game.isTeamFullyHealed()then
+	--return moveToCell(6, 130)
 	
-	else 
+	--else 
 		return moveToCell(21, 145) -- Mt. Moon B2F (wrong way)
-	end 
+	--end 
 	else 
 	  return moveToCell(36,219)
 	end 
@@ -72,9 +72,10 @@ end
 
 function MoonFossilQuest:MtMoonB2F()
 
-	if  not game.isTeamFullyHealed() and isNpcOnCell(20,76) then
-	return moveToCell(35,86)
-	elseif isNpcOnCell(20,76) then 
+	--if  not game.isTeamFullyHealed() and isNpcOnCell(20,76) then
+	--return moveToCell(35,86)
+	--else
+	if isNpcOnCell(20,76) then 
 	return talkToNpcOnCell(20,76)
 	else
 	return 	moveToCell(11,75)

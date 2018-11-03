@@ -38,7 +38,7 @@ function CascadeBadgeQuest:new()
 end
 
 function CascadeBadgeQuest:isDoable()
-	if self:hasMap() and not hasItem("HM01 - Cut") then
+	if self:hasMap() and not hasItem("HM09") then
 		return true
 	end
 	return false

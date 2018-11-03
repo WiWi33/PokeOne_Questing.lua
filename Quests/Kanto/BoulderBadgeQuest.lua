@@ -93,7 +93,7 @@ function BoulderBadgeQuest:new()
 end
 
 function BoulderBadgeQuest:isDoable()
-	if self:hasMap()
+	if self:hasMap() and not hasItem("HM01")
 	then
 		return true
 	end
@@ -106,11 +106,11 @@ end
 
 -- in case of black out
 function BoulderBadgeQuest:ViridianPokémonCenter()
-	return moveToArea("Viridian City")
+	return moveToCell(9, 129)
 end
 
 function BoulderBadgeQuest:ViridianCity()
-	return moveToArea("Route 2")
+	return moveToCell(142,48)
 end
 
 function BoulderBadgeQuest:Route2()

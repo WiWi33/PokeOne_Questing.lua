@@ -9,7 +9,7 @@ local Quest  = require "Quests/Quest"
 local Dialog = require "Quests/Dialog"
 
 local name        = 'Thunder Badge Quest'
-local description = 'From Route 5 to Route 6'
+local description = 'Get Thunder Badge and HM05 and move to Pokecenter Route 10'
 local level       = 10
 
 
@@ -61,7 +61,7 @@ function ThunderBadgeQuest:isDoable()
 end
 
 function ThunderBadgeQuest:isDone()
-	if ( getMapName() == "Route 10" )   then
+	if  getMapName() == "Route 9"   then
 		return true
 	else
 		return false
@@ -248,6 +248,15 @@ function ThunderBadgeQuest:Route11()
 	
 end
 
+
+function ThunderBadgeQuest:CeruleanCity()
+    if not hasItem("HM09") then 
+	return moveToCell(155,138)
+	else 
+	  return moveToCell(205,107)
+	end 
+		
+end
 
 function ThunderBadgeQuest:Route2()
     if not hasItem("HM09") then 

@@ -277,7 +277,7 @@ local blackListTargets = { --it will kill this targets instead catch
 function Quest:wildBattle()
 if getTeamSize() >0 then
 
-if  getAreaName() == "Mt. Moon B2F" or getAreaName() == "Mt. Moon"
+if  getAreaName() == "Rock Tunnel" or getAreaName() == "Mt. Moon"
  or getAreaName() == "Mt. Moon B1F" or getAreaName() == "Diglett's Cave" or getAreaName() == "Seafoam B4F"   then  
      return run()  or sendUsablePokemon()  or sendAnyPokemon() or attack()
 end	
@@ -290,12 +290,12 @@ end
 
 
 
- --  if  not isAlreadyCaught() and getPokedexOwned() < 11 
- --and not sys.tableHasValue(blackListTargets, getOpponentName())    then 
-  --  return useItem("Poké Ball")   or sendUsablePokemon() or run() or sendAnyPokemon()
+   if  not isAlreadyCaught() and getPokedexOwned() < 11 
+ and not sys.tableHasValue(blackListTargets, getOpponentName())    then 
+   return useItem("Poké Ball")   or sendUsablePokemon() or run() or sendAnyPokemon()
  -- else
  --  return attack() or useAnyMove()  or sendAnyPokemon()  or run()
- --  end 
+  end 
 	
 
 
@@ -332,9 +332,9 @@ function Quest:trainerBattle()
 	return game.useAnyMove()
 	end
 	if not self.canRun then -- trying to switch while a pokemon is squeezed end up in an infinity loop
-		return useMove("Acrobatics") or attack() or game.useAnyMove()
+		return  attack() or game.useAnyMove()
 	else
-	return useMove("Dragon Rage") or useMove("Acrobatics")   or attack() or sendUsablePokemon() or sendAnyPokemon()  
+	return  attack() or sendUsablePokemon() or sendAnyPokemon()  
 	end
 	
 end
