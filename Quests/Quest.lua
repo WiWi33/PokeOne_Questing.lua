@@ -323,7 +323,7 @@ end
 
 --else 
 
-return attack() or useAnyMove()  or run() or sendUsablePokemon() or sendAnyPokemon()  
+return attack()   or run() or sendUsablePokemon() or sendAnyPokemon()  
 end 
 end
 function Quest:trainerBattle()
