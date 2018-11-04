@@ -326,6 +326,10 @@ function ThunderBadgeQuest:solvePuzzle()
 end
 
 function ThunderBadgeQuest:VermilionGym()
+if not isTrainerInfoReceived()   then
+           log("getting trainer info")
+           return askForTrainerInfo()
+else 
 	   if not game.isTeamFullyHealed() or  countBadges() == 3 then
  		return moveToCell(87,90)
 	   else
@@ -339,7 +343,7 @@ function ThunderBadgeQuest:VermilionGym()
 			end
 		end
 	   end
-	-- end 
+end 
 end
 
 return ThunderBadgeQuest
