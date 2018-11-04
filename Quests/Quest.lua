@@ -522,7 +522,7 @@ elseif getPokemonName(1) == "Dratini" then
    elseif getPokemonName(1)  == "Swampert"  and getPokemonLevel(1) >=70 then 
   return  forgetAnyMoveExcept({"Ice Beam","Dig","Dive","Earthquake"})
   else
-	return forgetAnyMoveExcept({"Dig", "Shadow Ball", "Dark Pulse", "Surf", "Hex", "Air Slash", "Cut", "Acrobatics", "Poison Fang", "Thunderbolt", 
+	return forgetAnyMoveExcept({"Dig", "Shadow Ball","Water Pulse", "Dark Pulse", "Surf", "Hex", "Air Slash", "Cut", "Acrobatics", "Poison Fang", "Thunderbolt", 
 	"Sleep Powder",  "Petal Dance","Dragon Rage","Spark","Signal Beam","Ice Fang",
 	"Discharge","Electro Ball","Rock Smash","Surf","Dig","Dive","Sucker Punch","Play Rough","Earthquake","Sleep Powder", 
 	"Cut","Flamethrower","Fire Fang","Covet", "Shadow Ball", "Shadow Claw", "Blaze Kick", "Dragon Claw", "Psychic", "Night Slash",

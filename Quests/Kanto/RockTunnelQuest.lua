@@ -28,7 +28,7 @@ function RockTunnelQuest:isDoable()
 end
 
 function RockTunnelQuest:isDone()
-	if getMapName() == "Celadon City" or getMapName() == "Pokecenter Vermilion" then --FIX Blackout if not Route10 or Lavander Pokecenter is Setup
+	if getAreaName() == "Celadon City" or getAreaName() == "Vermilion Pokémon Center" then --FIX Blackout if not Route10 or Lavander Pokecenter is Setup
 		return true
 	else
 		return false
@@ -97,7 +97,7 @@ function RockTunnelQuest:RockTunnel()
 	elseif game.inRectangle(14,72,38,93) then 
 	  return moveToCell(17,91)
 	  else 
-	  moveToCexl(33,46)
+	  moveToCell(33,46)
 	end
 end
 
@@ -108,30 +108,34 @@ function RockTunnelQuest:LavenderTown()
 		return moveToCell(115,116)
 
 	else 
-		return moveToArea("Route 8")
+		return moveToCell(97,122)
 	end
 end
 
-function RockTunnelQuest:PokecenterLavender()
+function RockTunnelQuest:LavenderPokémonCenter()
+if self:needPokecenter() or not game.isTeamFullyHealed() then
 	self:pokecenter("Lavender Town")
+else
+   return moveToCell(53,25)
+end 
 end
 
 function RockTunnelQuest:Route8()
-	if isNpcOnCell(56,3) then -- Item: Leppa Berry
-		return talkToNpcOnCell(56,3)
+--if self:needPokecenter() or not game.isTeamFullyHealed() then
+
+	--return moveToCell(105,122)
+
+--else 
+	if isNpcOnCell(90,117) then -- Item: Leppa Berry
+		return talkToNpcOnCell(90,117)
 	elseif isNpcOnCell(57,3) then -- Item: Leppa Berry
 		return talkToNpcOnCell(57,3)
 	elseif isNpcOnCell(52,9) then --Pokemon: Growlithe LvL 10 (BlueBall)
 		return talkToNpcOnCell(52,9)
-	elseif isNpcOnCell(17,3) then  -- Item: Rawst Berry
-		return talkToNpcOnCell(17,3)
-	elseif isNpcOnCell(18,3) then  -- Item: Lum Berry
-		return talkToNpcOnCell(18,3)
-	elseif isNpcOnCell(18,3) then  -- Item: Perism Berry
-		return talkToNpcOnCell(18,3)
 	else
-		return moveToArea("Underground House 4")
+		return moveToCell(47,123)
 	end
+--end 
 end
 
 function RockTunnelQuest:UndergroundHouse4()
