@@ -89,13 +89,13 @@ function StartKantoQuest:ViridianPokémonMart()
 end
 
 function StartKantoQuest:OaksLab()
-    if getTeamSize() == 0 and KANTO_STARTER_ID = 1 then
+    if getTeamSize() == 0 and KANTO_STARTER_ID == 1 then
 		pushDialogAnswer("Bulbasaur")
         talkToNpcOnCell(22, 103) -- TODO : Choose you damn pokemon
-	elseif getTeamSize() == 0 and KANTO_STARTER_ID = 2 then
+	elseif getTeamSize() == 0 and KANTO_STARTER_ID == 2 then
 		pushDialogAnswer("Charmander")
         talkToNpcOnCell(22, 103) -- TODO : Choose you damn pokemon
-		elseif getTeamSize() == 0 and KANTO_STARTER_ID = 3 then
+		elseif getTeamSize() == 0 and KANTO_STARTER_ID == 3 then
 		pushDialogAnswer("Squirtle")
         talkToNpcOnCell(22, 103) -- TODO : Choose you damn pokemon
     else 

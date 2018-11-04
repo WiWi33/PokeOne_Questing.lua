@@ -45,7 +45,7 @@ function CascadeBadgeQuest:isDoable()
 end
 
 function CascadeBadgeQuest:isDone()
-	if getMapName() == "Route 5" then
+	if getAreaName() == "Route 5" then
 		return true
 	else
 		return false
@@ -68,7 +68,7 @@ function CascadeBadgeQuest:CeruleanCity()
     elseif not hasItem("S.S. Ticket") then 
 	     return moveToCell(183,73)
 	else
-		return moveToCell(155,138) -- Route 5
+		return moveToCell(155,140) -- Route 5
 	end
 end
 
