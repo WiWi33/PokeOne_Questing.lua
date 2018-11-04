@@ -54,14 +54,14 @@ function ThunderBadgeQuest:new()
 end
 
 function ThunderBadgeQuest:isDoable()
-	if   self:hasMap()     then
+	if  self:hasMap() then
 		return true
 	end
 	return false
 end
 
 function ThunderBadgeQuest:isDone()
-	if  getMapArea() == "Route 9"   then
+	if  getAreaName() == "Route 9"  then
 		return true
 	else
 		return false
@@ -136,7 +136,7 @@ function ThunderBadgeQuest:UndergroundPath()
 		  return moveToCell(7,67)
 		end
      else
-         	 if countBadges() == 3 and hasItem("HM09") then
+        if countBadges() == 3 and hasItem("HM09") then
 		  return moveToCell(11,83)
 		else
 		  return moveToCell(8,87)

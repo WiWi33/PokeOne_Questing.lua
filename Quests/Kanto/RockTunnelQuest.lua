@@ -133,28 +133,29 @@ function RockTunnelQuest:Route8()
 	elseif isNpcOnCell(52,9) then --Pokemon: Growlithe LvL 10 (BlueBall)
 		return talkToNpcOnCell(52,9)
 	else
-		return moveToCell(47,123)
+		return moveToCell(26,119)
 	end
 --end 
 end
 
-function RockTunnelQuest:UndergroundHouse4()
-	return moveToArea("Underground1")
+function RockTunnelQuest:UndergroundPath()
+if game.inRectangle(105, 6,115, 14) then
+	return moveToCell(108,10)
+elseif game.inRectangle(32, 4,88, 14) then
+  return moveToCell(33,9)
+else
+  return moveToCell(8,11)
+end 
 end
 
-function RockTunnelQuest:Underground1()
-	return moveToArea("Underground House 3")
-end
-
-function RockTunnelQuest:UndergroundHouse3()
-	return moveToArea("Route 7")
-end
 
 function RockTunnelQuest:Route7()
-	if isNpcOnCell(8,30) then -- Item: Sitrus Berry
-		return talkToNpcOnCell(8,30)
+	if isNpcOnCell(198,104) then 
+		return talkToNpcOnCell(198,104)
+		elseif isNpcOnCell(204,94) then 
+		return talkToNpcOnCell(204,94)
 	else
-		return moveToArea("Celadon City")
+		return moveToCell(167,85)
 	end
 end
 
