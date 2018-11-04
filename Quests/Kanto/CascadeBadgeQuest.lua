@@ -124,7 +124,7 @@ end
 
 
 function CascadeBadgeQuest:CeruleanGym() -- get Cascade Badge
-		if not isTrainerInfoReceived()   then
+	if not isTrainerInfoReceived()   then
            log("getting trainer info")
            return askForTrainerInfo()
 		   elseif  not game.isTeamFullyHealed() then

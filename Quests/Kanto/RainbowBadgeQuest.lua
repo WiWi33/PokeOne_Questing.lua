@@ -38,7 +38,7 @@ function RainbowBadgeQuest:new()
 end
 
 function RainbowBadgeQuest:isDoable()
-	if self:hasMap() and not hasItem("Soul Badge") and not isNpcOnCell(48,34) then
+	if self:hasMap() and not hasItem("Soul Badge")  then
 		return true
 	end
 	return false
@@ -53,17 +53,14 @@ function RainbowBadgeQuest:isDone()
 end
 
 function RainbowBadgeQuest:CeladonCity()
-	--if not enableTrainerBattles()  then 
-   --          enableTrainerBattles()
-	--else
-	if isNpcOnCell(21,51) and getPlayerX() == 21 and getPlayerY() == 50 and hasItem("Rainbow Badge") then --NPC: Trainer OP
-		return talkToNpcOnCell(21,51)
-	elseif self:needPokecenter() or not game.isTeamFullyHealed()  then
+if not isTrainerInfoReceived()   then
+           log("getting trainer info")
+           return askForTrainerInfo()
+else 
+    if self:needPokecenter() or not game.isTeamFullyHealed()  then
 		return moveToCell(165,82)
-	elseif isNpcOnCell(54,14) then --Item: Great Ball
-		return talkToNpcOnCell(54,14)
-	elseif isNpcOnCell(46,49) and not isNpcOnCell(48,34)  then --NPC: Rocket Guy
-		return talkToNpcOnCell(46,49)
+	elseif not hasItem("Coin Case") then 
+		return moveToCell(167,97)
 	elseif   not game.hasPokemonWithMove("Cut") then
 		if self.pokemonId <= getTeamSize() then					
 			useItemOnPokemon("HM01 - Cut", self.pokemonId)
@@ -72,7 +69,10 @@ function RainbowBadgeQuest:CeladonCity()
 		else
 			fatal("No pokemon in this team can learn - Cut")
 		end 
-	elseif not hasItem("Rainbow Badge") then
+   elseif   not hasItem("Silph Cope") then
+   return moveToCell(147,95)
+
+	elseif countBadges() < 4 then
 	    if not game.hasPokemonWithMove("Cut") then
 		if self.pokemonId <= getTeamSize() then					
 			useItemOnPokemon("HM01 - Cut", self.pokemonId)
@@ -81,34 +81,133 @@ function RainbowBadgeQuest:CeladonCity()
 		else
 			fatal("No pokemon in this team can learn - Cut")
 		end 
-		elseif isNpcOnCell(21,51) then 
-		 return   talkToNpcOnCell(21,51)
-		else
-		return moveToMap("CeladonGym")
+        else 
+		return moveToCell(122,122)
 		end 
 	elseif isNpcOnCell(14,42) and  not isNpcOnCell(48,34) and hasItem("Rainbow Badge") then --NPC: Remove the Guards
 		return talkToNpcOnCell(14,42)
 	elseif not hasItem("Lemonade") or (not hasItem("TM28") and getMoney() > 3500 )   then -- Buy Lemonade for Future Quest (Saffron Guard)
 		return moveToMap("Celadon Mart 1")
-	
 	else
-		return moveToMap("Route 7")
+		return moveToCell(193,93)
 	end
+end 
 end
 
-function RainbowBadgeQuest:PokecenterCeladon()
+function RainbowBadgeQuest:CeladonRestaurant()
+ if not hasItem("Coin Case") then  
+	return talkToNpcOnCell(161,38)
+ else 
+	    return moveToCell(166,43)
+ end 
+
+end
+
+function RainbowBadgeQuest:CeladonGameCorner()
+if game.inRectangle(118,64,137,79) then 
+ if not hasItem("Silph Cope") then  
+    if isNpcOnCell(133,67) then 
+	talkToNpcOnCell(133,67)
+	else
+	return moveToCell(135,67)
+	end 
+ else 
+	    return moveToCell(128,78)
+ end 
+ end 
+
+end
+
+function RainbowBadgeQuest:RocketHideoutB1F()
+if game.inRectangle(3,5,31,40) then 
+ if not hasItem("Silph Cope") then  
+    if isNpcOnCell(16,24) then 
+	talkToNpcOnCell(16,24)
+	elseif isNpcOnCell(8,23) then
+	return talkToNpcOnCell(8,23)
+	else
+	   if not hasItem("Lift Key") then 
+	   return moveToCell(20,7)
+	   else 
+	   return moveToCell(27,30)
+	   end 
+	end 
+ else 
+	    return moveToCell(12,7)
+ end 
+ elseif game.inRectangle(60,4,65,11) then 
+ pushDialogAnswer("B4F")
+    talkToNpcOnCell(61,5)
+ end 
+
+end
+function RainbowBadgeQuest:RocketHideoutB2F()
+--if game.inRectangle(3,5,31,40) then 
+ if not hasItem("Lift Key") then  
+    if getPlayerX() >= 31 and getPlayerY() <= 73 then 
+	   moveToCell(28,74)
+    else 
+	   moveToCell(27,67)
+	   end 
+ else 
+	    return moveToCell(38,67)
+ end 
+-- end 
+
+end
+function RainbowBadgeQuest:RocketHideoutB3F()
+--if game.inRectangle(3,5,31,40) then 
+ if not hasItem("Lift Key") then  
+    if isNpcOnCell(16,123)  then 
+	   talkToNpcOnCell(16,123)
+	   elseif isNpcOnCell(26,130)  then 
+	   talkToNpcOnCell(26,130)
+    else 
+	   moveToCell(20,135)
+	   end 
+ else 
+	    return moveToCell(21,113)
+ end 
+-- end 
+
+end
+
+function RainbowBadgeQuest:RocketHideoutB4F()
+if game.inRectangle(3,172,18,191) then 
+ if not hasItem("Lift Key") then  
+      if isNpcOnCell(10,184)  then 
+	   return talkToNpcOnCell(10,184)
+	   elseif isNpcOnCell(8,175)  then 
+	   return talkToNpcOnCell(8,175)
+	   end 
+ else 
+	    return moveToCell(18,187)
+ end 
+ elseif game.inRectangle(60,173,65,180) then 
+   if hasItem("Silph Cope") then
+    pushDialogAnswer("B4F")
+    talkToNpcOnCell(61,5)
+	else 
+	return moveToCell(62,179)
+	end 
+else 
+   if isNpcOnCell(28,190) then 
+   talkToNpcOnCell(28,190)
+   elseif hasItem("Silph Cope") then
+     return moveToCell(27,196)
+	else 
+	return moveToCell(24,184)
+	end 
+ end 
+
+end
+
+function RainbowBadgeQuest:CeladonPokémonCenter()
  if not game.isTeamFullyHealed() then  
 	self:pokecenter("Celadon City")
  else 
-   -- if  getTeamSize() >= 4 then  
-	 --  if isPCOpen() then
-       --  depositPokemonToPC(4)
-      -- else 
-	    return moveToCell()
-     --  end
-	-- else
-	 --  moveToMap("Celadon City")
-	--end 
+
+	    return moveToCell(12,84)
  end 
 end
 
@@ -129,33 +228,22 @@ function RainbowBadgeQuest:Route7()
 end
 
 function RainbowBadgeQuest:CeladonGym()
-	if not game.hasPokemonWithMove("Cut") then
-		if self.pokemonId <= getTeamSize() then					
-			useItemOnPokemon("HM01 - Cut", self.pokemonId)
-			log("Pokemon: " .. self.pokemonId .. " Try Learning: HM01 - Cut")
-			self.pokemonId = self.pokemonId + 1
-		else
-			fatal("No pokemon in this team can learn - Cut")
-		end
-	elseif hasItem("TM28") and not hasMove(1,"Dig") and getPokemonName(1) == "Mankey" then
-		  useItemOnPokemon("TM28",1)
-	elseif self:needPokecenter() or not game.isTeamFullyHealed() or not self.registeredPokecenter == "Pokecenter Celadon" or not self:isTrainingOver() then
-		return moveToMap("Celadon City")
-	elseif not hasItem("Rainbow Badge") then
-		talkToNpcOnCell(8,4) -- Erika
-	else
-	    if not game.hasPokemonWithMove("Cut") then
-		    if self.pokemonId <= getTeamSize() then					
-			useItemOnPokemon("HM01 - Cut", self.pokemonId)
-			log("Pokemon: " .. self.pokemonId .. " Try Learning: HM01 - Cut")
-			self.pokemonId = self.pokemonId + 1
-		    else
-			fatal("No pokemon in this team can learn - Cut")
-		    end
-		else
-		return moveToMap("Celadon City")
-		end 
-	end
+	if not isTrainerInfoReceived()   then
+           log("getting trainer info")
+           return askForTrainerInfo()
+    else 
+	   if countBadges() < 4 then
+	     if isNpcOnCell(45,46) then 
+		 return talkToNpcOnCell(45,46)
+		 
+		 else 
+	      return talkToNpcOnCell(45,11) --moveToCell(45,14)
+		  
+		  end 
+	    else
+		 return moveToCell(44,53)
+	   end 
+	end 
 end
 
 function RainbowBadgeQuest:CeladonMart1()
@@ -222,18 +310,6 @@ function RainbowBadgeQuest:CeladonMart3()
        return moveToMap("Celadon Mart Elevator")
  end
 end
-function RainbowBadgeQuest:CeladonMart2()
-    n = getMoney() / 600
-    if getMoney() > 600 and hasItem("TM28") and hasItem("Lemonade") then  
-	    if not isShopOpen() then
-		     return talkToNpcOnCell(4,10)
-		 else
-		  	     return buyItem("Great Ball", n)
-		  end
-	else  
-       return moveToMap("Celadon Mart Elevator")
- end
-end
 function RainbowBadgeQuest:CeladonMart6()
 	if not hasItem("Lemonade") then
 		if not isShopOpen() then
@@ -252,14 +328,6 @@ end
 
 function RainbowBadgeQuest:UndergroundHouse3()
 	return moveToMap("Underground1")
-end
-
-function RainbowBadgeQuest:Underground1()
-	return moveToMap("Underground House 4")
-end
-
-function RainbowBadgeQuest:UndergroundHouse4()
-	return moveToMap("Route 8")
 end
 
 function RainbowBadgeQuest:Route8()

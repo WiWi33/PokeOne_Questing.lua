@@ -377,7 +377,7 @@ sys.slakingSleep = false
 			self.forceCaught = true
 			return true
 		end
-	elseif sys.stringContains(message, "black out") and self.level < 97 and self:isTrainingOver() then
+	elseif sys.stringContains(message, "You have lost the battle!") and self.level < 97 and self:isTrainingOver() then
 		self.level = self.level + 1
 		self:startTraining()
 		log("Increasing " .. self.name .. " quest level to " .. self.level .. ". Training time!")
