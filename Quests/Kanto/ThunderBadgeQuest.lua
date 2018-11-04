@@ -61,7 +61,7 @@ function ThunderBadgeQuest:isDoable()
 end
 
 function ThunderBadgeQuest:isDone()
-	if  getMapName() == "Route 9"   then
+	if  getMapArea() == "Route 9"   then
 		return true
 	else
 		return false

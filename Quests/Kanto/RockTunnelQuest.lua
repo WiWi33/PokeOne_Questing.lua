@@ -82,7 +82,7 @@ function RockTunnelQuest:RockTunnel()
 	   else
 		return moveToCell(47,25)
 	  end 
-	elseif game.inRectangle(1,59,59,76) then
+	elseif game.inRectangle(1,59,59,75) then
 	  if isNpcOnCell(16,67) then 
 	   talkToNpcOnCell(16,67)
 	  else 

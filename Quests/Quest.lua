@@ -291,7 +291,7 @@ end
 
 
    if  not isAlreadyCaught() and getPokedexOwned() < 11 
- and not sys.tableHasValue(blackListTargets, getOpponentName())    then 
+ and not sys.tableHasValue(blackListTargets, getOpponentName())  and hasItem("Poké Ball")    then 
    return useItem("Poké Ball")   or sendUsablePokemon() or run() or sendAnyPokemon()
  -- else
  --  return attack() or useAnyMove()  or sendAnyPokemon()  or run()
