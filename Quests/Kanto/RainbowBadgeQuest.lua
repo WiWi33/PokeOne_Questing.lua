@@ -136,8 +136,12 @@ if game.inRectangle(3,5,31,40) then
 	    return moveToCell(12,7)
  end 
  elseif game.inRectangle(60,4,65,11) then 
- pushDialogAnswer("B4F")
-    talkToNpcOnCell(61,5)
+	if not hasItem("Silph Scope") then
+ 		pushDialogAnswer("B4F")
+		return talkToNpcOnCell(61,5)
+	else
+		return moveToCell(63, 10)
+	end
  end 
 
 end
@@ -185,20 +189,21 @@ if game.inRectangle(3,172,18,191) then
  end 
  elseif game.inRectangle(60,173,65,180) then 
    if hasItem("Silph Scope") then
-    pushDialogAnswer("B4F")
-    talkToNpcOnCell(61,5)
+    pushDialogAnswer("B1F")
+    talkToNpcOnCell(61,174)
 	else 
 	return moveToCell(62,179)
 	end 
 else 
-   if isNpcOnCell(28,190) then 
-   talkToNpcOnCell(28,190)
+   if isNpcOnCell(25,170) then 
+     return talkToNpcOnCell(25,170)
    elseif hasItem("Silph Scope") then
      return moveToCell(27,196)
 	else 
-	return moveToCell(24,184)
+	 return talkToNpcOnCell(24,178)
 	end 
  end 
+
 
 end
 
