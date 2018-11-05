@@ -71,7 +71,8 @@ else
 		end 
    elseif   not hasItem("Silph Scope") then
    return moveToCell(147,95)
-
+   elseif not self:isTrainingOver then 
+     return  moveToCell(190,89)
 	elseif countBadges() < 4 then
 	    if not game.hasPokemonWithMove("Cut") then
 		if self.pokemonId <= getTeamSize() then					
@@ -221,7 +222,7 @@ function RainbowBadgeQuest:Route7()
 		return moveToMap("Celadon City")
 	elseif hasItem("Rainbow Badge") and hasItem("Lemonade") then
 		return moveToMap("Underground House 3")
-	elseif ( not self:isTrainingOver() and not hasItem("Rainbow Badge") )or (hasPokemonInTeam("Squirtle") and getPokemonLevel(1) < 60) then 
+	elseif  not self:isTrainingOver() then 
 		if not game.inRectangle(12,8,21,21) then
 			return moveToCell(17,17)
 		else
