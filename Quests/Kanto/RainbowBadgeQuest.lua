@@ -218,9 +218,7 @@ function RainbowBadgeQuest:CeladonPokémonCenter()
 end
 
 function RainbowBadgeQuest:Route7()
-	if self:needPokecenter() or not game.isTeamFullyHealed()  then
-		return moveToMap("Celadon City")
-	elseif hasItem("Rainbow Badge") and hasItem("Lemonade") then
+   if hasItem("Rainbow Badge") and hasItem("Lemonade") then
 		return moveToMap("Underground House 3")
 	elseif  not self:isTrainingOver() then 
 
