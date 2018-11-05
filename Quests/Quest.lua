@@ -75,6 +75,16 @@ function Quest:pokecenter(exitMapName) -- idealy make it work without exitMapNam
 	end
 end
 
+function Quest:pokecentercell(cellX,cellY) -- idealy make it work without exitMapName
+	self.registeredPokecenter = getAreaName()
+	sys.todo("add a moveDown() or moveToNearestLink() or getLinks() to PROShine")
+	if not game.isTeamFullyHealed() then
+		return usePokecenter()
+	else
+	  return moveToCell(cellX,cellY)
+	end
+end
+
 -- at a point in the game we'll always need to buy the same things
 -- use this function then
 function Quest:pokemart(x,y,npcx,npcy)

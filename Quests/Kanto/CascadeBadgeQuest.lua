@@ -54,7 +54,7 @@ end
 
 
 function CascadeBadgeQuest:CeruleanCity()
-    if self:needPokecenter()  or not game.isTeamFullyHealed() then
+    if self:needPokecenter()  or not game.isTeamFullyHealed() or self.registeredPokecenter !=  "Cerulean Pokémon Center" then
 		return moveToCell(162,114)
 	--elseif self:needPokemart() then
 	--	return moveToCell(166,133) -- pokemart
@@ -85,11 +85,12 @@ function CascadeBadgeQuest:CeruleanPokémonMart()
 end
 
 function CascadeBadgeQuest:CeruleanPokémonCenter()
- if not game.isTeamFullyHealed() then
-	return self:pokecenter("Cerulean City")
-  else
-  return moveToCell(61,26)
-  end 
+-- if not game.isTeamFullyHealed() then
+--	return self:pokecenter("Cerulean City")
+ -- else
+ -- return moveToCell(61,26)
+--  end 
+return self:pokecentercell(61,26)
 end
 
 
@@ -127,7 +128,8 @@ function CascadeBadgeQuest:CeruleanGym() -- get Cascade Badge
 	if not isTrainerInfoReceived()   then
            log("getting trainer info")
            return askForTrainerInfo()
-		   elseif  not game.isTeamFullyHealed() then
+    else
+	 if  not game.isTeamFullyHealed() then
 		return moveToCell(51,136)
 	elseif countBadges() <= 1 and countBadges() >= 0 then
 		return talkToNpcOnCell(51, 109)
@@ -136,6 +138,7 @@ function CascadeBadgeQuest:CeruleanGym() -- get Cascade Badge
 	else 
 	   return  moveToCell(51,136)
 	end
+	end 
 end
 
 return CascadeBadgeQuest
