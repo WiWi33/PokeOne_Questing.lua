@@ -12,7 +12,7 @@ local Dialog = require "Quests/Dialog"
 
 local name		  = 'Rainbow Badge'
 local description = 'Beat Erika + Get Lemonade for future quest'
-local level = 33
+local level = 35
 
 local dialogs = {
 	martElevatorFloor1 = Dialog:new({ 
@@ -71,7 +71,7 @@ else
 		end 
    elseif   not hasItem("Silph Scope") then
    return moveToCell(147,95)
-   elseif not self:isTrainingOver then 
+   elseif not self:isTrainingOver() then 
      return  moveToCell(190,89)
 	elseif countBadges() < 4 then
 	    if not game.hasPokemonWithMove("Cut") then
@@ -223,11 +223,8 @@ function RainbowBadgeQuest:Route7()
 	elseif hasItem("Rainbow Badge") and hasItem("Lemonade") then
 		return moveToMap("Underground House 3")
 	elseif  not self:isTrainingOver() then 
-		if not game.inRectangle(12,8,21,21) then
-			return moveToCell(17,17)
-		else
+
 			return moveToGrass()
-		end
 	else
 		return moveToMap("Celadon City")
 	end
