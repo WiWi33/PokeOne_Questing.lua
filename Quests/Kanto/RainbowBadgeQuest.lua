@@ -12,7 +12,7 @@ local Dialog = require "Quests/Dialog"
 
 local name		  = 'Rainbow Badge'
 local description = 'Beat Erika + Get Lemonade for future quest'
-local level = 3
+local level = 33
 
 local dialogs = {
 	martElevatorFloor1 = Dialog:new({ 
