@@ -85,8 +85,6 @@ else
         else 
 		return moveToCell(122,122)
 		end 
-	elseif isNpcOnCell(14,42) and  not isNpcOnCell(48,34) and hasItem("Rainbow Badge") then --NPC: Remove the Guards
-		return talkToNpcOnCell(14,42)
 	elseif not hasItem("Lemonade") or (not hasItem("TM28") and getMoney() > 3500 )   then -- Buy Lemonade for Future Quest (Saffron Guard)
 		return moveToMap("Celadon Mart 1")
 	else
