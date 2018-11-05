@@ -217,12 +217,12 @@ end
 
 function RainbowBadgeQuest:Route7()
    if hasItem("Rainbow Badge") and hasItem("Lemonade") then
-		return moveToMap("Underground House 3")
+	 	return moveToMap("Underground House 3")
 	elseif  not self:isTrainingOver() then 
 
 			return moveToGrass()
 	else
-		return moveToMap("Celadon City")
+		return moveToCell(170,87)
 	end
 end
 
