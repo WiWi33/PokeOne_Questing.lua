@@ -72,8 +72,6 @@ function Quest:pokecenter(exitMapName) -- idealy make it work without exitMapNam
 	sys.todo("add a moveDown() or moveToNearestLink() or getLinks() to PROShine")
 	if not game.isTeamFullyHealed() then
 		return usePokecenter()
-	else
-		return moveToArea(exitMapName)
 	end
 end
 
@@ -276,7 +274,9 @@ local blackListTargets = { --it will kill this targets instead catch
 
 function Quest:wildBattle()
 if getTeamSize() >0 then
-
+if getAreaName() == "Mt. Moon"  and game.inRectangle(98,39,103,40)  then -- we need to train if lose jessie and james  so that's it
+return attack()  or sendUsablePokemon()  or sendAnyPokemon() or run() 
+end
 if  getAreaName() == "Rock Tunnel" or getAreaName() == "Mt. Moon"
  or getAreaName() == "Mt. Moon B1F" or getAreaName() == "Diglett's Cave" or getAreaName() == "Seafoam B4F"   then  
      return run()  or sendUsablePokemon()  or sendAnyPokemon() or attack()

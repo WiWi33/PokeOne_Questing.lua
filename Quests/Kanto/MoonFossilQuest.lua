@@ -38,7 +38,6 @@ end
 
 function MoonFossilQuest:Route3()
 	if not game.isTeamFullyHealed()
-		
 	then
 		return moveToCell(178,48)
 	else
@@ -48,9 +47,10 @@ end
 
 function MoonFossilQuest:MtMoon()
 		if not game.isTeamFullyHealed()
-		
 	then
 	return moveToCell(105,49)
+	elseif not self:isTrainingOver() then 
+	   return moveToRectangle(98,39,103,40) 
 	else
 		return moveToCell(95,16) -- Mt. Moon B1F
 	end
