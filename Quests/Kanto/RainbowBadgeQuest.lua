@@ -69,10 +69,11 @@ else
 		else
 			fatal("No pokemon in this team can learn - Cut")
 		end 
+	elseif not self:isTrainingOver() then 
+     return  moveToCell(190,89)
    elseif   not hasItem("Silph Scope") then
    return moveToCell(147,95)
-   elseif not self:isTrainingOver() then 
-     return  moveToCell(190,89)
+
 	elseif countBadges() < 4 then
 	    if not game.hasPokemonWithMove("Cut") then
 		if self.pokemonId <= getTeamSize() then					
@@ -85,8 +86,8 @@ else
         else 
 		return moveToCell(122,122)
 		end 
-	elseif not hasItem("Lemonade") or (not hasItem("TM28") and getMoney() > 3500 )   then -- Buy Lemonade for Future Quest (Saffron Guard)
-		return moveToMap("Celadon Mart 1")
+	--elseif not hasItem("Lemonade") or (not hasItem("TM28") and getMoney() > 3500 )   then -- Buy Lemonade for Future Quest (Saffron Guard)
+	--	return moveToMap("Celadon Mart 1")
 	else
 		return moveToCell(193,93)
 	end
