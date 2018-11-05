@@ -69,7 +69,7 @@ else
 		else
 			fatal("No pokemon in this team can learn - Cut")
 		end 
-   elseif   not hasItem("Silph Cope") then
+   elseif   not hasItem("Silph Scope") then
    return moveToCell(147,95)
 
 	elseif countBadges() < 4 then
@@ -105,7 +105,7 @@ end
 
 function RainbowBadgeQuest:CeladonGameCorner()
 if game.inRectangle(118,64,137,79) then 
- if not hasItem("Silph Cope") then  
+ if not hasItem("Silph Scope") then  
     if isNpcOnCell(133,67) then 
 	talkToNpcOnCell(133,67)
 	else
@@ -120,7 +120,7 @@ end
 
 function RainbowBadgeQuest:RocketHideoutB1F()
 if game.inRectangle(3,5,31,40) then 
- if not hasItem("Silph Cope") then  
+ if not hasItem("Silph Scope") then  
     if isNpcOnCell(16,24) then 
 	talkToNpcOnCell(16,24)
 	elseif isNpcOnCell(8,23) then
@@ -184,7 +184,7 @@ if game.inRectangle(3,172,18,191) then
 	    return moveToCell(18,187)
  end 
  elseif game.inRectangle(60,173,65,180) then 
-   if hasItem("Silph Cope") then
+   if hasItem("Silph Scope") then
     pushDialogAnswer("B4F")
     talkToNpcOnCell(61,5)
 	else 
@@ -193,7 +193,7 @@ if game.inRectangle(3,172,18,191) then
 else 
    if isNpcOnCell(28,190) then 
    talkToNpcOnCell(28,190)
-   elseif hasItem("Silph Cope") then
+   elseif hasItem("Silph Scope") then
      return moveToCell(27,196)
 	else 
 	return moveToCell(24,184)

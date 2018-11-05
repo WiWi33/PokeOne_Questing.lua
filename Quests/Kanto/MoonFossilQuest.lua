@@ -33,7 +33,7 @@ function MoonFossilQuest:isDoable()
 end
 
 function MoonFossilQuest:isDone()
-	return getAreaName() == "Cerulean City"
+	return getAreaName() == "Cerulean City" or getAreaName() == "Pewter Pokémon Center" 
 end
 
 function MoonFossilQuest:Route3()
