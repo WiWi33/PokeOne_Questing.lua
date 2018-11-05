@@ -61,7 +61,7 @@ function ThunderBadgeQuest:isDoable()
 end
 
 function ThunderBadgeQuest:isDone()
-	if  getAreaName() == "Route 9"  then
+	if  getAreaName() == "Route 9" or   getAreaName() == "Cerulean Pokémon Center" then
 		return true
 	else
 		return false
