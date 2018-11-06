@@ -11,8 +11,8 @@ local Quest  = require "Quests/Quest"
 local Dialog = require "Quests/Dialog"
 
 local name		  = 'Rainbow Badge'
-local description = 'Beat Erika + Get Lemonade for future quest'
-local level = 35
+local description = 'Beat Erika + Get Silph Scope for future quest'
+local level = 36
 
 local dialogs = {
 	martElevatorFloor1 = Dialog:new({ 
@@ -26,7 +26,14 @@ local dialogs = {
 	}),
 	martElevatorFloor2 = Dialog:new({ 
 		"the second floor"
-	})
+	}),
+	grandma = Dialog:new({ 
+		"Please find my friend, Mr. Fuji!"
+	}),
+	policegirl = Dialog:new({ 
+		"Tea!",
+		"Okay. Get us some tea!"
+	}),
 }
 
 local RainbowBadgeQuest = Quest:new()
@@ -38,14 +45,14 @@ function RainbowBadgeQuest:new()
 end
 
 function RainbowBadgeQuest:isDoable()
-	if self:hasMap() and not hasItem("Soul Badge")  then
+	if self:hasMap() and not hasItem("Poké Flute")  then
 		return true
 	end
 	return false
 end
 
 function RainbowBadgeQuest:isDone()
-	if (hasItem("Rainbow Badge") and getAreaName() == "Lavender Town" )or  isNpcOnCell(48,34) then
+	if (hasItem("Silph Scope") and getAreaName() == "Lavender Town" ) then
 		return true
 	else
 		return false
@@ -69,7 +76,7 @@ else
 		else
 			fatal("No pokemon in this team can learn - Cut")
 		end 
-	elseif not self:isTrainingOver() then 
+	elseif not self:isTrainingOver() and countBadges() < 4 then 
      return  moveToCell(190,89)
    elseif   not hasItem("Silph Scope") then
    return moveToCell(147,95)
@@ -86,12 +93,23 @@ else
         else 
 		return moveToCell(122,122)
 		end 
-	--elseif not hasItem("Lemonade") or (not hasItem("TM28") and getMoney() > 3500 )   then -- Buy Lemonade for Future Quest (Saffron Guard)
-	--	return moveToMap("Celadon Mart 1")
+	elseif  countBadges() == 4  and dialogs.grandma.state == false  then -- Buy Lemonade for Future Quest (Saffron Guard)
+		return moveToCell(144,82)
+	elseif  countBadges() == 4  and dialogs.grandma.state == false  then -- Buy Lemonade for Future Quest (Saffron Guard)
+		return moveToCell(144,82)
 	else
 		return moveToCell(193,93)
 	end
 end 
+end
+
+function RainbowBadgeQuest:CeladonCondominiums()
+ if not dialogs.grandma.state then  
+	return talkToNpcOnCell(11,13)
+ else 
+	    return moveToCell(21,26)
+ end 
+
 end
 
 function RainbowBadgeQuest:CeladonRestaurant()
@@ -217,12 +235,35 @@ function RainbowBadgeQuest:CeladonPokémonCenter()
 end
 
 function RainbowBadgeQuest:Route7()
+  if not isTrainerInfoReceived()   then
+           log("getting trainer info")
+           return askForTrainerInfo()
+else 
+  if countBadges() == 4  then 
+     if  not  dialogs.policegirl.state then 
+	 return moveToCell(225,90)
+	 else 
+     return moveToCell(191,106)
+	 end 
+  else 
     if  not self:isTrainingOver() then 
 
 			return moveToGrass()
 	else
 		return moveToCell(170,87)
 	end
+	end 
+end 
+end
+
+function RainbowBadgeQuest:SaffronCityGate()
+  if  not  dialogs.policegirl.state then 
+	 return talkToNpcOnCell(10,23)
+	 else 
+     return moveToCell(3,26)
+	 
+ end 
+
 end
 
 function RainbowBadgeQuest:CeladonGym()
@@ -244,92 +285,19 @@ function RainbowBadgeQuest:CeladonGym()
 	end 
 end
 
-function RainbowBadgeQuest:CeladonMart1()
-	if not hasItem("Lemonade") or not hasItem("TM28") then
-		return moveToMap("Celadon Mart Elevator")
-	else
-		return moveToMap("Celadon City")
-	end
-end
 
-function RainbowBadgeQuest:CeladonMartElevator()
-	if not hasItem("Lemonade") then
-		if not dialogs.martElevatorFloor5.state then
-			pushDialogAnswer(5)
-			return talkToNpcOnCell(1,1)
-		else
-			dialogs.martElevatorFloor5.state = false
-			return moveToCell(2,5)
-		end
-	elseif not hasItem("TM28") then 
-	     if not dialogs.martElevatorFloor3.state then
-		pushDialogAnswer(3)
-		return talkToNpcOnCell(1,1)
-		else
-			dialogs.martElevatorFloor3.state = false
-			return moveToCell(2,5)
-		end
-	elseif hasItem("Lemonade") and hasItem("TM28") and getMoney() > 600000 then 
-	      if not dialogs.martElevatorFloor2.state then
-		pushDialogAnswer(2)
-		return talkToNpcOnCell(1,1)
-		else
-			dialogs.martElevatorFloor2.state = false
-			return moveToCell(2,5)
-		end
-	else
-		if not dialogs.martElevatorFloor1.state then
-			pushDialogAnswer(1)
-			return talkToNpcOnCell(1,1)
-		else
-			dialogs.martElevatorFloor1.state = false
-			return moveToCell(2,5)
-		end
-	end
-end
-
-function RainbowBadgeQuest:CeladonMart5()
-	if not hasItem("Lemonade") then
-		return moveToMap("Celadon Mart 6")
-	elseif not hasItem("TM28") then
-	   return moveToMap("Celadon Mart Elevator")
-	else
-		return moveToMap("Celadon Mart Elevator")
-	end
-end
-function RainbowBadgeQuest:CeladonMart3()
-    if not hasItem("TM28") and   getMoney() > 3500 then  
-	    if not isShopOpen() then
-		     return talkToNpcOnCell(10,10)
-		 else
-		  	     return buyItem("TM28", 1)
-		  end
-	else  
-       return moveToMap("Celadon Mart Elevator")
- end
-end
-function RainbowBadgeQuest:CeladonMart6()
-	if not hasItem("Lemonade") then
-		if not isShopOpen() then
-			return talkToNpcOnCell(15, 7)
-		else
-			if getMoney() > 1000 then
-				return buyItem("Lemonade", 5)
-			else
-				return buyItem("Lemonade",(getMoney()/200))
-			end
-		end
-	else
-		return moveToMap("Celadon Mart 5")
-	end
-end
-
-function RainbowBadgeQuest:UndergroundHouse3()
-	return moveToMap("Underground1")
+function RainbowBadgeQuest:UndergroundPath()
+if game.inRectangle(105, 6,115, 14) then
+	return moveToCell(111,13)
+elseif game.inRectangle(32, 4,88, 14) then
+  return moveToCell(87,9)
+else
+  return moveToCell(11,7)
+end 
 end
 
 function RainbowBadgeQuest:Route8()
-	return moveToMap("Lavender Town")
+	return moveToCell(105,123)
 end
 
 return RainbowBadgeQuest

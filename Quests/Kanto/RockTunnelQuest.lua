@@ -21,7 +21,7 @@ function RockTunnelQuest:new()
 end
 
 function RockTunnelQuest:isDoable()
-	if self:hasMap() and not hasItem("Rainbow Badge") then
+	if self:hasMap() and not hasItem("Silph Scope") then
 		return true
 	end
 	return false
@@ -138,6 +138,7 @@ function RockTunnelQuest:Route8()
 --end 
 end
 
+
 function RockTunnelQuest:UndergroundPath()
 if game.inRectangle(105, 6,115, 14) then
 	return moveToCell(108,10)
@@ -147,7 +148,6 @@ else
   return moveToCell(8,11)
 end 
 end
-
 
 function RockTunnelQuest:Route7()
 	if isNpcOnCell(198,104) then 
