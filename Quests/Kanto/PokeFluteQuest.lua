@@ -11,7 +11,7 @@ local Quest  = require "Quests/Quest"
 local Dialog = require "Quests/Dialog"
 
 local name		  = 'Poké Flute'
-local description = 'Lavender Town (Pokemon Tower)'
+local description = 'Lavender Town (get pokeflute ) and come fuchsia'
 local level = 32
 
 local dialogs = {
@@ -38,7 +38,7 @@ function PokeFluteQuest:isDoable()
 end
 
 function PokeFluteQuest:isDone()
-	if (hasItem("Poké Flute") and getAreaName() == "Route 18")  then --FIX Blackout 
+	if (hasItem("Poké Flute") and getAreaName() == "Fuchsia City")  then --FIX Blackout 
 		return true
 	else
 		return false
@@ -57,7 +57,7 @@ function PokeFluteQuest:LavenderTown()
 	elseif not hasItem("Poké Flute") then
 		return moveToCell(126,117)
 	else
-		return moveToCell(96,122)
+		return moveToCell(119,160)
 	end
 end
 
@@ -140,15 +140,15 @@ function PokeFluteQuest:Route8()
 	return moveToCell(26,119)
 end
 
-function PokeFluteQuest:UndergroundPath()
-if game.inRectangle(105, 6,115, 14) then
-	return moveToCell(108,10)
-elseif game.inRectangle(32, 4,88, 14) then
-  return moveToCell(33,9)
-else
-  return moveToCell(8,11)
-end 
-end
+--function PokeFluteQuest:UndergroundPath()
+--if game.inRectangle(105, 6,115, 14) then
+--	return moveToCell(108,10)
+--elseif game.inRectangle(32, 4,88, 14) then
+ ---- return moveToCell(33,9)
+--else
+--  return moveToCell(8,11)
+--end 
+--end
 function PokeFluteQuest:Route7()
 	if isNpcOnCell(198,104) then 
 		return talkToNpcOnCell(198,104)
@@ -161,4 +161,39 @@ end
 function PokeFluteQuest:CeladonCity()
   return moveToCell(95,105)
 end
+
+function PokeFluteQuest:LavenderTownGate()
+  return moveToCell(13,23)
+end
+function PokeFluteQuest:Route12()
+if isNpcOnCell(262,133) then 
+pushDialogAnswer(getItemId("Poké Flute")) 
+talkToNpcOnCell(262,133)
+elseif isNpcOnCell(257,147) then 
+return talkToNpcOnCell(257,147)
+
+else
+  return moveToCell(267,224)
+end
+end 
+function PokeFluteQuest:Route13()
+
+  return moveToCell(137,236)
+
+end 
+function PokeFluteQuest:Route14()
+
+  return moveToCell(108,260)
+
+end 
+function PokeFluteQuest:Route15()
+
+  return moveToCell(42,263)
+
+end 
+function PokeFluteQuest:FuchsiaCityGate()
+
+  return moveToCell(128,77)
+
+end 
 return PokeFluteQuest
