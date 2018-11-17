@@ -81,7 +81,7 @@ function CascadeBadgeQuest:CeruleanHouse6()
 end
 
 function CascadeBadgeQuest:Route4()
-	if not self:isTrainingOver() then
+	if not self:isTrainingOver() or getPokemonLevel(1) < level then
 		return moveToGrass()
 	else 
 		return moveToCell(130,101)
