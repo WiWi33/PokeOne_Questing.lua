@@ -10,7 +10,7 @@ local Dialog = require "Quests/Dialog"
 
 local name        = 'Cascade Badge Quest'
 local description = 'From Cerulean to Route 5'
-local level       = 10
+local level       = 29
 
 local dialogs = {
 	npcMisty = Dialog:new({
@@ -58,8 +58,8 @@ function CascadeBadgeQuest:CeruleanCity()
 		return moveToCell(162,114)
 	--elseif self:needPokemart() then
 	--	return moveToCell(166,133) -- pokemart
-	elseif  not self:isTrainingOver() then
-		return moveToCell(39,0)-- Route 24 Bridge'
+	elseif  not self:isTrainingOver() or getPokemonLevel(1) < level  then
+		return moveToCell(115,101)-- Route 24 Bridge'
 	elseif not isTrainerInfoReceived()   then
            log("getting trainer info")
            return askForTrainerInfo()
@@ -77,6 +77,14 @@ function CascadeBadgeQuest:CeruleanHouse6()
 		return talkToNpcOnCell(9,8)
 	else 
 		moveToMap("Cerulean City")
+	end
+end
+
+function CascadeBadgeQuest:Route4()
+	if not self:isTrainingOver() then
+		return moveToGrass()
+	else 
+		return moveToCell(130,101)
 	end
 end
 

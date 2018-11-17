@@ -14,6 +14,7 @@ local ThunderBadgeQuest   = require('Quests/Kanto/ThunderBadgeQuest')
 local RockTunnelQuest   = require('Quests/Kanto/RockTunnelQuest')
 local RainbowBadgeQuest = require('Quests/Kanto/RainbowBadgeQuest')
 local PokeFluteQuest = require('Quests/Kanto/PokeFluteQuest')
+local SoulBadgeQuest = require('Quests/Kanto/SoulBadgeQuest')
 local quests = {
 	-- Kanto Quests
 	StartKantoQuest:new(),
@@ -24,6 +25,7 @@ local quests = {
 	RockTunnelQuest:new(),
 	RainbowBadgeQuest:new(),
 	PokeFluteQuest:new(),
+	SoulBadgeQuest:new(),
 }
 
 function QuestManager:new(o)

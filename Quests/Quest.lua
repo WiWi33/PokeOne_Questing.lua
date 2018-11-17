@@ -213,6 +213,9 @@ function Quest:advanceSorting()
 					end
 				end
 	end
+	if  game.maxTeamLevel() - game.minTeamLevel() > 15 then 
+	return sortTeamRangeByLevelAscending(1, pokemonsUsable)
+	end 
 	return sortTeamRangeByLevelDescending(1, pokemonsUsable)
 end
 
@@ -320,16 +323,18 @@ end
 	--	end
 --end
 
---if getPokemonLevel(1) < getOpponentLevel() then
-	--	local opponentLevel = getOpponentLevel()
-	--	local myPokemonLvl  = getPokemonLevel(getActivePokemonNumber())
-	---	if opponentLevel >= myPokemonLvl then
-	--		local requestedId, requestedLevel = game.getMaxLevelUsablePokemon()
-	---		if requestedId ~= nil and requestedLevel > myPokemonLvl then
-	---			return sendPokemon(requestedId)
-	---		end
-	--	end
-	--end
+if getPokemonLevel(1) < getOpponentLevel() then
+		local opponentLevel = getOpponentLevel()
+		local myPokemonLvl  = getPokemonLevel(getActivePokemonNumber())
+		if opponentLevel >= myPokemonLvl then
+		local requestedId, requestedLevel = game.getMaxLevelUsablePokemon()
+		if requestedId ~= nil and requestedLevel > myPokemonLvl then
+			return sendPokemon(requestedId)
+			end
+		else 
+		   return attack() or useAnyMove()  or sendAnyPokemon()  or run()
+		end
+	end
 
 --else 
 
