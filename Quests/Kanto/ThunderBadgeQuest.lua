@@ -54,14 +54,17 @@ function ThunderBadgeQuest:new()
 end
 
 function ThunderBadgeQuest:isDoable()
-	if  self:hasMap() then
+	if  self:hasMap() and  not hasItem("Silph Scope") then
 		return true
 	end
 	return false
 end
 
 function ThunderBadgeQuest:isDone()
-	if  getAreaName() == "Route 9" or   getAreaName() == "Cerulean Pokémon Center" then
+	if  getAreaName() == "Route 9" or   getAreaName() == "Cerulean Pokémon Center"
+	or (getAreaName() == "Underground Path" and (game.inRectangle(105, 6,115, 14)
+	or game.inRectangle(32, 4,88, 14) or game.inRectangle(4, 4,14, 12) ))
+	then
 		return true
 	else
 		return false
@@ -233,7 +236,7 @@ end
 end 
 
 function ThunderBadgeQuest:VermilionPokémonMart()
-   self:pokemart(10,17,9,9)
+   self:pokemart(9,9)
 end
 
 

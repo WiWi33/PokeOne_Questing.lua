@@ -53,7 +53,7 @@ function StartKantoQuest:new()
 end
 
 function StartKantoQuest:isDoable()
-	if self:hasMap()
+	if self:hasMap() and not hasItem("Poké Flute")
 	then
 		return true
 	end

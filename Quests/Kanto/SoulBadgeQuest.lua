@@ -12,13 +12,17 @@ local Dialog = require "Quests/Dialog"
 
 local name		  = 'Sould Badge'
 local description = 'Fuchsia City'
-local level = 79
+local level = 48
 
 local dialogs = {
 	questSurfAccept = Dialog:new({ 
 		"There is something there I want you to take",
 		"Did you get the HM broseph"
-	})
+	}),
+	questRockSmash = Dialog:new({ 
+		"Hif fuff hefifoo!",
+		"Ha lof ha feef ee hafahi ho."
+	}),
 }
 
 local SoulBadgeQuest = Quest:new()
@@ -27,11 +31,12 @@ function SoulBadgeQuest:new()
 	local o = Quest.new(SoulBadgeQuest, name, description, level, dialogs)
 	o.zoneExp = 1
 	o.pokemonId = 1
+	o.nosurf = false
 	return o
 end
 
 function SoulBadgeQuest:isDoable()	
-	if self:hasMap() and not hasItem("Marsh Badge")  then
+	if self:hasMap() and not hasItem("Secret Key III")  then
 		if getMapName() == "Route 15" then 
 			if hasItem("Soul Badge") and hasItem("HM03") then
 				return false
@@ -46,7 +51,7 @@ function SoulBadgeQuest:isDoable()
 end
 
 function SoulBadgeQuest:isDone()
-	if (hasItem("Soul Badge") and hasItem("HM03") and getMapName() == "Route 15") or getMapName() == "Safari Entrance" or getMapName() == "Route 20"then
+	if   getAreaName()== "Cinnabar Pokémon Center" then
 		return true
 	else
 		return false
@@ -131,8 +136,27 @@ function SoulBadgeQuest:randomZoneExp()
 end
 
 function SoulBadgeQuest:FuchsiaPokémonCenter()
-
+ if hasItem("HM03") and getTeamSize() == 6 then 
+       if not game.hasPokemonWithMove("Surf") then
+			if self.pokemonId <= getTeamSize() then					
+				useItemOnPokemon("HM03", self.pokemonId)
+				log("Pokemon: " .. self.pokemonId .. " Try Learning: HM03 - Surf")
+				self.pokemonId = self.pokemonId + 1
+				return
+			else
+				 if isPCOpen() then
+				    self.nosurf = true
+                    return depositPokemonToPC(6)
+                 else 
+                     return usePC()
+                 end
+			end
+		else
+			 self:pokecentercell(102,98)
+		end 
+ else 
 	self:pokecentercell(102,98)
+ end 
 end 
 function SoulBadgeQuest:Route18()
 	if  self:canEnterSafari() then
@@ -144,66 +168,138 @@ function SoulBadgeQuest:Route18()
 end
 
 function SoulBadgeQuest:FuchsiaCity()
+self.pokemonId = 1
 if not isTrainerInfoReceived()   then
            log("getting trainer info")
            return askForTrainerInfo()
 else 
+  if game.inRectangle(63,41,77,52) then
+       if (not dialogs.questRockSmash.state or hasItem("Gold Teeth")) and not hasItem("HM06") then
+			return talkToNpcOnCell(68,47)
+		else
+			return moveToNearestLink()
+		end
+  elseif  game.inRectangle(95,43,107,54) then
+       if not hasItem("Good Rod") then
+			return talkToNpcOnCell(105,46)
+		else
+			return moveToCell(99,52)
+		end
+  else 
      if self:needPokecenter() or not game.isTeamFullyHealed() or self.registeredPokecenter ~= "Fuchsia Pokémon Center" then
 		return moveToCell(115,98)
-	elseif countBadges() < 5	then
+	elseif not hasItem("Good Rod") then 
+	    return moveToCell(141,93)
+	elseif countBadges() < 6	then
 		return moveToCell(97,98)
 	elseif not self:canEnterSafari() then
 		return moveToArea("Route 18")	
-	elseif not hasItem("HM03") then
-		if not dialogs.questSurfAccept.state then
-			return moveToArea("Fuchsia City Stop House")
+	elseif not hasItem("HM06") then
+		if not dialogs.questRockSmash.state or hasItem("Gold Teeth") then
+			return moveToCell(134,93)
 		else
-			return moveToArea("Safari Stop")
+			return moveToCell(121,51)
 		end
+    elseif  not game.hasPokemonWithMove("Surf") and getTeamSize() == 6 and hasItem("HM03") then
+	    return moveToCell(115,98)
 	else
-		return moveToArea("Fuchsia City Stop House")
+		return moveToCell(108,118)
+	end
+   end 
+end 
+end
+function SoulBadgeQuest:FuchsiaCityGate()
+	if  not game.hasPokemonWithMove("Surf") and getTeamSize() == 6 and hasItem("HM03") then
+		return moveToCell(73,134)
+	else
+		return moveToCell(73,147) --73,134
+	end
+end
+function SoulBadgeQuest:SafariGate()
+
+    if getPlayerY() > 15  then 
+		if not hasItem("HM03") and self:canEnterSafari() then
+			return talkToNpcOnCell(36,15)
+		else
+			return moveToCell(33,24)
+		end
+    else 
+	    if  hasItem("HM03") and self:canEnterSafari() then
+			return talkToNpcOnCell(36,15)
+		else
+			return moveToCell(33,11)
+		end
+	end 
+ end 
+function SoulBadgeQuest:KantoSafariZone()
+ if game.inRectangle(123,125,155,150) or game.inRectangle(144,112,155,124) or game.inRectangle(144,112,170,113) then 
+	if not  hasItem("HM03") then
+		 return moveToCell(169,113)
+	else
+		return moveToCell(126,148)
 	end
 end 
 end
-function SoulBadgeQuest:FuchsiaHouse1()
-	if hasItem("Old Rod") and not hasItem("Good Rod") and getMoney() > 15000 then
-		return talkToNpcOnCell(3,6)
+
+function SoulBadgeQuest:KantoSafariZoneEast()
+	if not  hasItem("HM03") then
+	      if getPlayerX() < 162 then 
+	      return  moveToCell(182,113)
+		  elseif game.inRectangle(178,104,194,118) then 
+		  return moveToCell(177,110)
+		  elseif getPlayerY() > 100 then 
+		   return moveToCell(166,100)
+		  else 
+		 return moveToCell(151,67)
+		 end 
+		 
 	else
-		return moveToArea("Fuchsia City")
+		return moveToCell(160,113)
 	end
 end
-function SoulBadgeQuest:SafariStop()
-	if self:needPokemart_() then
-		self:pokemart_()
-	elseif hasItem("Soul Badge") and dialogs.questSurfAccept.state then
-		if not hasItem("HM03") and self:canEnterSafari() then
-			return talkToNpcOnCell(7,4)
-		else
-			return moveToArea("Fuchsia City")
-		end
+
+function SoulBadgeQuest:CinnabarIsland()
+	moveToCell(102,119)
+end
+
+function SoulBadgeQuest:KantoSafariZoneNorth()
+	if not  hasItem("Gold Teeth") then
+		 return moveToCell(83,73)
+    elseif not hasItem("HM03") then 
+	  if getPlayerX() > 76 and getPlayerY() > 40 then 
+	  return moveToCell(87,40)
+	  else 
+	  return moveToCell(40,74)
+	  end
 	else
-		return moveToArea("Fuchsia City")
+		return moveToCell(160,113)
 	end
 end
- 
-function SoulBadgeQuest:Route15StopHouse()
-	if game.maxTeamLevel() >= 95  and   hasItem("HM03") then
-		return moveToArea("Route 15")
-	elseif self:needPokecenter() or not self.registeredPokecenter == "Pokecenter Fuchsia" or ( self:isTrainingOver() and not hasPokemonInTeam("Ditto")) then
-		return moveToArea("Fuchsia City")
-	elseif hasItem("HM03") then
-		return moveToArea("Route 15")
-	elseif not self:isTrainingOver() then
-		self.zoneExp = math.random(1,4)
-		return moveToArea("Route 15")
+
+function SoulBadgeQuest:KantoSafariZoneWest()
+	if not  hasItem("Gold Teeth") then
+		 return talkToNpcOnCell(52,107)
+	    elseif not hasItem("HM03") then 
+	  return moveToCell(40,74)
+	   elseif  hasItem("HM03") then 
+	  return moveToGrass()
 	else
-		return moveToArea("Route 15")
+		return moveToCell(83,67)
+	end
+end
+
+function SoulBadgeQuest:SecretHouse()
+	if  not hasItem("HM03") then --isNpcOnCell(10,80) then
+		 return talkToNpcOnCell(10,80)
+	 
+	else
+		return moveToCell(10,85)
 	end
 end
 
 function SoulBadgeQuest:FuchsiaCityStopHouse()
-	if game.maxTeamLevel() >= 95  and   hasItem("HM03") then
-		return moveToArea("Fuchsia City")
+	if not hasItem("HM03") then
+	   return moveToCell(169,113)
 	elseif not hasItem("HM03") then
 		if dialogs.questSurfAccept.state then
 			return moveToArea("Fuchsia City")
@@ -216,29 +312,54 @@ function SoulBadgeQuest:FuchsiaCityStopHouse()
 end
 
 function SoulBadgeQuest:Route19()
-	if game.maxTeamLevel() >= 95 and   hasItem("HM03")  then
-		return moveToArea("Fuchsia City Stop House")
-	elseif hasItem("HM03") then
-	   if not game.hasPokemonWithMove("Surf") then
-			if self.pokemonId <= getTeamSize() then					
-				useItemOnPokemon("HM03", self.pokemonId)
-				log("Pokemon: " .. self.pokemonId .. " Try Learning: HM03")
-				self.pokemonId = self.pokemonId + 1
-				return
-			
-			else
-				useItemOnPokemon("HM03", 2)
-			end
+
+if  not game.hasPokemonWithMove("Surf") then 
+    if getTeamSize() < 6 then
+	    if  getPlayerX() != 284 and getPlayerY() != 90 then
+			return moveToCell(284,90)
 		else
-			return moveToArea("Route 20")
+			return useItem("Super Rod")
 		end
 	else
-		if dialogs.questSurfAccept.state then
-			return moveToArea("Fuchsia City Stop House")
-		else
-			return talkToNpcOnCell(33,19)
-		end
+			return moveToCell(287,74)
 	end
+else 
+moveToCell(263,111)
+end 
+
+end 
+
+function SoulBadgeQuest:Route20()
+if game.inRectangle(206,125,225,135) or  game.inRectangle(184,128,206,141) or   getPlayerX() < 183 then
+   moveToCell(110,125)
+else
+ moveToCell(199,118)
+ end
+end
+
+function SoulBadgeQuest:SeafoamIslands()
+if game.inRectangle(27,290,40,303) then 
+
+ moveToCell(35,296)
+ else 
+ moveToCell(10,256)
+ end 
+end
+function SoulBadgeQuest:SeafoamIslandsB1F()
+if not game.hasPokemonWithMove("Rock Smash") then
+			if self.pokemonId <= getTeamSize() then					
+				useItemOnPokemon("HM06", self.pokemonId)
+				log("Pokemon: " .. self.pokemonId .. " Try Learning: HM06 - Rock Smash")
+				self.pokemonId = self.pokemonId + 1
+				return
+			else
+				fatal("no pokemon can learn rock smash")
+			end
+elseif isNpcOnCell(14,16) then 
+			 talkToNpcOnCell(14,16)
+			 else
+			 moveToCell(49,24)
+	end 
 end
 
 function SoulBadgeQuest:Route15()
@@ -255,7 +376,7 @@ if not isTrainerInfoReceived()   then
            log("getting trainer info")
            return askForTrainerInfo()
 else 
-	if countBadges() < 5 then
+	if countBadges() < 6 then
 	 --   
 		return talkToNpcOnCell(9,84)
 	else

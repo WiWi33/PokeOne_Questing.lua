@@ -166,8 +166,10 @@ end
 function RainbowBadgeQuest:RocketHideoutB2F()
 --if game.inRectangle(3,5,31,40) then 
  if not hasItem("Lift Key") then  
-    if getPlayerX() >= 31 and getPlayerY() <= 73 then 
-	   moveToCell(28,74)
+    if getPlayerX() > 31 and getPlayerY() <= 73 then 
+	   moveToCell(31,74)
+	elseif getPlayerX() >= 31 and getPlayerY() > 73 then 
+	moveToCell(26,74)
     else 
 	   moveToCell(27,67)
 	   end 
@@ -235,10 +237,14 @@ function RainbowBadgeQuest:CeladonPokémonCenter()
 end
 
 function RainbowBadgeQuest:Route7()
-  if not isTrainerInfoReceived()   then
+ if  not self:isTrainingOver() then 
+
+			return moveToGrass()
+else
+ if not isTrainerInfoReceived()   then
            log("getting trainer info")
            return askForTrainerInfo()
-else 
+ else 
   if countBadges() == 4  then 
      if  not  dialogs.policegirl.state then 
 	 return moveToCell(225,90)
@@ -246,13 +252,10 @@ else
      return moveToCell(191,106)
 	 end 
   else 
-    if  not self:isTrainingOver() then 
-
-			return moveToGrass()
-	else
 		return moveToCell(170,87)
-	end
-	end 
+	
+  end 
+end 
 end 
 end
 

@@ -126,9 +126,10 @@ function RockTunnelQuest:Route8()
 	--return moveToCell(105,122)
 
 --else 
-	if isNpcOnCell(90,117) then -- Item: Leppa Berry
-		return talkToNpcOnCell(90,117)
-	elseif isNpcOnCell(57,3) then -- Item: Leppa Berry
+	--if isNpcOnCell(90,117) then -- Item: Leppa Berry
+	--	return talkToNpcOnCell(90,117)
+	--else
+	if isNpcOnCell(57,3) then -- Item: Leppa Berry
 		return talkToNpcOnCell(57,3)
 	elseif isNpcOnCell(52,9) then --Pokemon: Growlithe LvL 10 (BlueBall)
 		return talkToNpcOnCell(52,9)

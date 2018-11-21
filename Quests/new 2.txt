@@ -1,0 +1,11 @@
+for pokemonId=1, pokemonsUsable, 1 do
+		if not isPokemonUsable(pokemonId) then --Move it at bottom of the Team
+			for pokemonId_ = pokemonsUsable + 1, getTeamSize(), 1 do	
+				if isPokemonUsable(pokemonId_) then
+					swapPokemon(pokemonId, pokemonId_)
+					return true
+				end
+			end
+			
+		end
+	end

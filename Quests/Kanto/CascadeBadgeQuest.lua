@@ -56,7 +56,7 @@ end
 function CascadeBadgeQuest:CeruleanCity()
     if self:needPokecenter()  or not game.isTeamFullyHealed() or self.registeredPokecenter !=  "Cerulean Pokémon Center" then
 		return moveToCell(162,114)
-	--elseif self:needPokemart() then
+--	elseif self:needPokemart() then
 	--	return moveToCell(166,133) -- pokemart
 	elseif  not self:isTrainingOver() or getPokemonLevel(1) < level  then
 		return moveToCell(115,101)-- Route 24 Bridge'
