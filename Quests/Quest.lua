@@ -258,10 +258,12 @@ function Quest:advanceSorting()
 					end
 				end
 	end
+	if getTeamSize() > 1 then 
 	if  game.maxTeamLevel() - game.minTeamLevel() > 15  and game.maxTeamLevel() < self.level then 
 	return sortTeamRangeByLevelAscending(1, pokemonsUsable)
 	end 
 	return sortTeamRangeByLevelDescending(1, pokemonsUsable)
+	end 
 end
 
 
