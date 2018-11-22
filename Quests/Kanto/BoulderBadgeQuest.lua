@@ -171,7 +171,9 @@ function BoulderBadgeQuest:Route2Stop2()
 end
 
 function BoulderBadgeQuest:route2Up()
-    if not dialogs.npcYoungsterJohn.state then 
+    if not self:isTrainingOver() then
+	  moveToGrass()
+    elseif not dialogs.npcYoungsterJohn.state then 
 	   talkToNpcOnCell(26,78)
     else 
 	   moveToCell(20,56)
@@ -180,7 +182,9 @@ end
 
 function BoulderBadgeQuest:PewterCity()
 	--if not hasBadge("Boulder Badge") then 
-	 if not  dialogs.npcBrock.state then
+	 if not self:isTrainingOver() then
+	    moveToCell(21,63)
+	 elseif not  dialogs.npcBrock.state then
 		if not dialogs.npcDavePewter.state    then 
 		   return talkToNpcOnCell(22,55)
 		elseif   not game.isTeamFullyHealed() then
