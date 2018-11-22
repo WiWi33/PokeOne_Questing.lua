@@ -33,12 +33,11 @@ function MoonFossilQuest:isDoable()
 end
 
 function MoonFossilQuest:isDone()
-	return getAreaName() == "Cerulean City"
+	return getAreaName() == "Cerulean City" or getAreaName() == "Pewter Pokémon Center" 
 end
 
 function MoonFossilQuest:Route3()
 	if not game.isTeamFullyHealed()
-		
 	then
 		return moveToCell(178,48)
 	else
@@ -46,11 +45,12 @@ function MoonFossilQuest:Route3()
 	end
 end
 
-function MoonFossilQuest:MtMoon()
-		if not game.isTeamFullyHealed()
-		
+function MoonFossilQuest:MtMoon() 
+     if not game.isTeamFullyHealed() and self:isTrainingOver()
 	then
 	return moveToCell(105,49)
+	elseif not self:isTrainingOver() then 
+	   return moveToRectangle(98,39,103,40) 
 	else
 		return moveToCell(95,16) -- Mt. Moon B1F
 	end
@@ -59,12 +59,12 @@ end
 function MoonFossilQuest:MtMoonB1F()
      
 	if game.inRectangle(4, 128, 25, 147) then
-	if  not game.isTeamFullyHealed()then
-	return moveToCell(6, 130)
+	--if  not game.isTeamFullyHealed()then
+	--return moveToCell(6, 130)
 	
-	else 
+	--else 
 		return moveToCell(21, 145) -- Mt. Moon B2F (wrong way)
-	end 
+	--end 
 	else 
 	  return moveToCell(36,219)
 	end 
@@ -72,9 +72,10 @@ end
 
 function MoonFossilQuest:MtMoonB2F()
 
-	if  not game.isTeamFullyHealed() and isNpcOnCell(20,76) then
-	return moveToCell(35,86)
-	elseif isNpcOnCell(20,76) then 
+	--if  not game.isTeamFullyHealed() and isNpcOnCell(20,76) then
+	--return moveToCell(35,86)
+	--else
+	if isNpcOnCell(20,76) then 
 	return talkToNpcOnCell(20,76)
 	else
 	return 	moveToCell(11,75)

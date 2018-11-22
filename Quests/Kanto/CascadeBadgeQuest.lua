@@ -10,7 +10,7 @@ local Dialog = require "Quests/Dialog"
 
 local name        = 'Cascade Badge Quest'
 local description = 'From Cerulean to Route 5'
-local level       = 10
+local level       = 29
 
 local dialogs = {
 	npcMisty = Dialog:new({
@@ -38,14 +38,14 @@ function CascadeBadgeQuest:new()
 end
 
 function CascadeBadgeQuest:isDoable()
-	if self:hasMap() and not hasItem("HM01 - Cut") then
+	if self:hasMap() and not hasItem("HM09") then
 		return true
 	end
 	return false
 end
 
 function CascadeBadgeQuest:isDone()
-	if getMapName() == "Route 5" then
+	if getAreaName() == "Route 5" then
 		return true
 	else
 		return false
@@ -54,12 +54,12 @@ end
 
 
 function CascadeBadgeQuest:CeruleanCity()
-    if self:needPokecenter()  or not game.isTeamFullyHealed() then
+    if self:needPokecenter()  or not game.isTeamFullyHealed() or self.registeredPokecenter !=  "Cerulean Pokémon Center" then
 		return moveToCell(162,114)
-	--elseif self:needPokemart() then
+--	elseif self:needPokemart() then
 	--	return moveToCell(166,133) -- pokemart
-	elseif  not self:isTrainingOver() then
-		return moveToCell(39,0)-- Route 24 Bridge'
+	elseif  not self:isTrainingOver() or getPokemonLevel(1) < level  then
+		return moveToCell(115,101)-- Route 24 Bridge'
 	elseif not isTrainerInfoReceived()   then
            log("getting trainer info")
            return askForTrainerInfo()
@@ -68,7 +68,7 @@ function CascadeBadgeQuest:CeruleanCity()
     elseif not hasItem("S.S. Ticket") then 
 	     return moveToCell(183,73)
 	else
-		return moveToCell(155,138) -- Route 5
+		return moveToCell(155,140) -- Route 5
 	end
 end
 
@@ -80,16 +80,25 @@ function CascadeBadgeQuest:CeruleanHouse6()
 	end
 end
 
+function CascadeBadgeQuest:Route4()
+	if not self:isTrainingOver() or getPokemonLevel(1) < level then
+		return moveToGrass()
+	else 
+		return moveToCell(130,101)
+	end
+end
+
 function CascadeBadgeQuest:CeruleanPokémonMart()
 	self:pokemart(22,7)
 end
 
 function CascadeBadgeQuest:CeruleanPokémonCenter()
- if not game.isTeamFullyHealed() then
-	return self:pokecenter("Cerulean City")
-  else
-  return moveToCell(61,26)
-  end 
+-- if not game.isTeamFullyHealed() then
+--	return self:pokecenter("Cerulean City")
+ -- else
+ -- return moveToCell(61,26)
+--  end 
+return self:pokecentercell(61,26)
 end
 
 
@@ -124,18 +133,20 @@ end
 
 
 function CascadeBadgeQuest:CeruleanGym() -- get Cascade Badge
-		if not isTrainerInfoReceived()   then
+	if not isTrainerInfoReceived()   then
            log("getting trainer info")
            return askForTrainerInfo()
-		   elseif  not game.isTeamFullyHealed() then
+    else
+	 if  not game.isTeamFullyHealed() then
 		return moveToCell(51,136)
-	elseif countBadges() <= 1 and ccountBadges() >= 0 then
+	elseif countBadges() <= 1 and countBadges() >= 0 then
 		return talkToNpcOnCell(51, 109)
 	elseif countBadges() == 2  and not dialogs.npcafterbeat.state then 
 	     return talkToNpcOnCell(55, 131)
 	else 
 	   return  moveToCell(51,136)
 	end
+	end 
 end
 
 return CascadeBadgeQuest

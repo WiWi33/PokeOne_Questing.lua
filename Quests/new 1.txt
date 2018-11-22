@@ -1,0 +1,123 @@
+if getPokemonName(1) == "Eevee" then 
+  return forgetAnyMoveExcept({"Swift","Quick Attack"})
+elseif getPokemonName(1) == "Espeon" then
+  return forgetAnyMoveExcept({"Psychic","Psybeam","Confusion"})
+  elseif getPokemonName(1) == "Butterfree" then
+  return forgetAnyMoveExcept({"Sleep Powder"})
+  elseif getPokemonName(1) == "Charmander" then
+  return forgetAnyMoveExcept({"Dragon Rage","Fire Fang","Flamethrower","Slash"})
+  elseif getPokemonName(1) == "Gyarados" and  (hasMove(1,"Flail") or hasMove(1,"Tackle") or hasMove(1,"Splash"))  then
+  return forgetMove("Flail") or forgetMove("Tackle") or forgetMove("Splash") or forgetMove("Nightmare")
+  elseif getPokemonName(1) == "Mankey" then
+  return forgetAnyMoveExcept({"Karate Chop","Thunderbolt","Dig","Assurance"})
+    elseif getPokemonName(1) == "Primeape" then
+  return forgetAnyMoveExcept({"Assurance","Close Combat","Thunderbolt","Dig"})
+elseif getPokemonName(1) == "Houndour" then
+  return forgetAnyMoveExcept({"Crunch","Flamethrower","Faint Attack","Feint Attack","Fire Fang"})
+  elseif getPokemonName(1) == "Roggenrola" then
+  return forgetAnyMoveExcept({"Stone Edge","Rock Slide","Smack Down","Headbutt"})
+   elseif getPokemonName(1) == "Donphan" then
+  return forgetAnyMoveExcept({"Earthquake","Knock Off","Assurance","Thunder Fang"})
+  elseif getPokemonName(1) == "Venomoth" then
+  return forgetAnyMoveExcept({"Bug Buzz","Poison Fang","Psychic","Zen Headbutt"})
+  elseif getPokemonName(1) == "Pikachu" then
+  return forgetAnyMoveExcept({"Quick Attack","Electro Ball","Feint","Thunderbolt"})
+  elseif getPokemonName(1) == "Kadabra" then 
+  return forgetAnyMoveExcept({"Psychic","Psybeam","Confusion","Psycho Cut"})
+ elseif getPokemonName(1) == "Poochyena" then  
+    return forgetAnyMoveExcept({"Sucker Punch","Rock Smash","Crunch","Bite"})
+elseif getPokemonName(1) == "Totodile" then 
+  return forgetAnyMoveExcept({"Cut","Surf","Ice Fang","Crunch"})
+ elseif getPokemonName(1) == "Croconaw" then 
+  return forgetAnyMoveExcept({"Cut","Surf","Ice Fang","Crunch"})
+  elseif getPokemonName(1) == "Feraligatr" then 
+  return forgetAnyMoveExcept({"Cut","Surf","Ice Fang","Crunch"})
+elseif getPokemonName(1) == "Umbreon" then 
+  return forgetAnyMoveExcept({"Pursuit","Feint Attack","Assurance"})
+elseif getPokemonName(1) == "Growlithe" then 
+  return forgetAnyMoveExcept({"Flame Wheel","Flamethrower","Crunch","Bite"})
+elseif getPokemonName(1) == "Psyduck" then 
+  return forgetAnyMoveExcept({"Aqua Tail","Confusion","Zen Headbutt","Surf"})
+elseif getPokemonName(1) == "Krabby" then
+   return forgetAnyMoveExcept({"Crabhammer","Brine","Stomp","Surf"})
+elseif getPokemonName(1) == "Snorlax" then 
+  return forgetAnyMoveExcept({"Crunch","Body Slam","Chip Away"})
+elseif getPokemonName(1) == "Tentacool" then 
+  return forgetAnyMoveExcept({"Cut","Water Pulse","Water Gun","Sludge Wave","Surf","Bubble Beam","Brine"})
+elseif getPokemonName(1) == "Hitmonlee" then 
+  return forgetAnyMoveExcept({"Mega Kick","Brick Break","Jump Kick","Double Kick"})
+ elseif getPokemonName(1) == "Ursaring" then 
+  return forgetAnyMoveExcept({"Feint Attack","Slash","Jump Kick","Double Kick"})
+elseif getPokemonName(1) == "Hitmonchan" then 
+  return forgetAnyMoveExcept({"Fire Punch","Ice Punch","Thunder Punch","Sky Uppercut"})
+elseif getPokemonName(1) == "Kabuto" then
+  return forgetAnyMoveExcept({"Ancient Power","Mud Shot","Aqua Jet","Mega Drain"})
+elseif getPokemonName(1) == "Omanyte" then
+  return forgetAnyMoveExcept({"Ancient Power","Mud Shot","Brine","Bite"})
+elseif getPokemonName(1) == "Snubbull" then
+  return forgetAnyMoveExcept({"Thunder Fang","Fire Fang","Ice Fang"})
+elseif getPokemonName(1) == "Bulbasaur" then
+  return forgetAnyMoveExcept({"Vine Whip","Razor Leaf","Seed Bomb","Cut"})
+elseif getPokemonName(1) == "Dratini" then
+  return forgetAnyMoveExcept({"Dragon Tail","Aqua Tail","Dragon Rage","Dragon Rush"})
+  elseif getPokemonName(1) == "Diglett" then
+  return forgetAnyMoveExcept({"Sucker Punch","Slash","Earthquake","Earth Power"})
+ elseif getPokemonName(1) == "Budew" then
+  return forgetAnyMoveExcept({"Mega Drain","Cut","	Absorb"})
+  elseif getPokemonName(1) == "Rattata" then
+  return forgetAnyMoveExcept({"Bite","Cut","Crunch","Quick Attack","Assurance","Pursuit"})
+  elseif getPokemonName(1) == "Sentret" then 
+  return forgetAnyMoveExcept({"Sucker Punch","Quick Attack","Cut","Surf"})
+  elseif getPokemonName(1) == "Ekans" then 
+  return forgetAnyMoveExcept({"Acid Spray","Mud Bomb","Bite"})
+  elseif getPokemonName(1) == "Spearow" then 
+  return forgetAnyMoveExcept({"Assurance","Pursuit","Aerial Ace"})
+  elseif getPokemonName(1) == "Drowzee" then 
+  return forgetAnyMoveExcept({"Psybeam","Headbutt","Psychic","Psyshock"})
+  elseif getPokemonName(1) == "Paras" then 
+  return  forgetAnyMoveExcept({"Cut","Giga Drain","Fury Cutter"})
+  elseif getPokemonName(1) == "Sandshrew" then 
+  return  forgetAnyMoveExcept({"Cut","Dig","Gyro Ball"})
+   elseif getPokemonName(1) == "Squirtle" then 
+  return  forgetAnyMoveExcept({"Bite","Aqua Tail","Skull Bash"})
+  elseif getPokemonName(1) == "Bronzor" then 
+  return  forgetAnyMoveExcept({"Extrasensory","Confusion","Payback","Feint Attack","Payback"})
+  elseif getPokemonName(1) == "Totodile" then 
+  return  forgetAnyMoveExcept({"Cut","Surf","Ice Fang","Crunch"})
+  elseif getPokemonName(1) == "Machop" then 
+  return  forgetAnyMoveExcept({"Cross Chop","Wake-Up Slap","Low Sweep","Submission"})
+  elseif getPokemonName(1) == "Bellsprout" then 
+  return  forgetAnyMoveExcept({"Razor Leaf","Poison Jab","Knock Off","Acid"})
+  elseif getPokemonName(1) == "Meowth" then 
+  return  forgetAnyMoveExcept({"Night Slash","Slash","Assurance"})
+  elseif getPokemonName(1) == "Clefairy" then 
+  return  forgetAnyMoveExcept({"Wake-Up Slap","Meteor Mash","Moonblast","Body Slam"}) 
+  elseif getPokemonName(1) == "Pidgey" then 
+  return  forgetAnyMoveExcept({"Air Slash","Wing Attack","Hurricane","Quick Attack"})
+  elseif getPokemonName(1) == "Wingull" then 
+  return  forgetAnyMoveExcept({"Air Slash","Pursuit","Hurricane","Water Pulse"})
+  elseif getPokemonName(1) == "Clamperl" then 
+  return  forgetAnyMoveExcept({"Clamp","Water Gun","Whirlpool"})
+  elseif getPokemonName(1) == "Oddish" then 
+  return  forgetAnyMoveExcept({"Moon Blast","Giga Drain","Petal Dance","Sleep Powder"})
+  elseif getPokemonName(1) == "Onix" then 
+  return  forgetAnyMoveExcept({"Dig","Dragon Breath","Rock Tomb","Smack Down"})
+  elseif getPokemonName(1) == "Geodude" then 
+  return  forgetAnyMoveExcept({"Earthquake","Smack Down","Rock Throw","Bulldoze"})
+   elseif getPokemonName(1) == "Pineco" then 
+  return  forgetAnyMoveExcept({"Bug Bite","Payback","Rapid Spin","Gyro Ball"})
+   elseif getPokemonName(1) == "Gastly" then 
+  return  forgetAnyMoveExcept({"Thunderbolt","Sucker Punch","Shadow Ball","Dark Pulse","Shadow Punch"})
+   elseif getPokemonName(getTeamSize()) == "Haunter" and getAreaName() == "Saffron City" then 
+  return  forgetAnyMoveExcept({"Thunderbolt","Sucker Punch","Shadow Ball","Dark Pulse","Shadow Punch"})
+   elseif getPokemonName(1) == "Haunter" then 
+  return  forgetAnyMoveExcept({"Thunderbolt","Sucker Punch","Shadow Ball","Dark Pulse","Shadow Punch","Surf"})
+  elseif getPokemonName(1) == "Gyarados"  and getAreaName() ~="Elite Four Lance Room" then 
+  return  forgetAnyMoveExcept({"Ice Fang","Crunch","Dragon Dance","Aqua Tail"})
+   elseif getPokemonName(1) == "Gyarados" and  getAreaName() =="Elite Four Lance Room" then 
+  return  forgetAnyMoveExcept({"Ice Fang","Crunch","Dragon Dance","Aqua Tail"})
+  elseif getPokemonName(1)  == "Marshtomp"  and getPokemonLevel(1) >=70 then 
+  return  forgetAnyMoveExcept({"Ice Beam","Dig","Dive","Surf"})
+   elseif getPokemonName(1)  == "Swampert"  and getPokemonLevel(1) >=70 then 
+  return  forgetAnyMoveExcept({"Ice Beam","Dig","Dive","Earthquake"})
+  else

@@ -11,10 +11,13 @@ local BoulderBadgeQuest   = require('Quests/Kanto/BoulderBadgeQuest')
 local MoonFossilQuest     = require('Quests/Kanto/MoonFossilQuest')
 local CascadeBadgeQuest   = require('Quests/Kanto/CascadeBadgeQuest')
 local ThunderBadgeQuest   = require('Quests/Kanto/ThunderBadgeQuest')
-
-
-
-
+local RockTunnelQuest   = require('Quests/Kanto/RockTunnelQuest')
+local RainbowBadgeQuest = require('Quests/Kanto/RainbowBadgeQuest')
+local PokeFluteQuest = require('Quests/Kanto/PokeFluteQuest')
+local SoulBadgeQuest = require('Quests/Kanto/SoulBadgeQuest')
+local MarshBadgeQuest = require('Quests/Kanto/MarshBadgeQuest')
+local VolcanoBadgeQuest = require('Quests/Kanto/VolcanoBadgeQuest')
+local EarthBadgeQuest = require('Quests/Kanto/EarthBadgeQuest')
 local quests = {
 	-- Kanto Quests
 	StartKantoQuest:new(),
@@ -22,6 +25,13 @@ local quests = {
 	MoonFossilQuest:new(),
 	CascadeBadgeQuest:new(),
 	ThunderBadgeQuest:new(),
+	RockTunnelQuest:new(),
+	RainbowBadgeQuest:new(),
+	PokeFluteQuest:new(),
+	SoulBadgeQuest:new(),
+	MarshBadgeQuest:new(),
+	VolcanoBadgeQuest:new(),
+	EarthBadgeQuest:new(),
 }
 
 function QuestManager:new(o)
